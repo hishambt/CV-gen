@@ -1,0 +1,12 @@
+{
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnPaste": true,
+	"prettier.useEditorConfig": false,
+	"prettier.useTabs": false,
+	"prettier.printWidth": 150,
+	"prettier.configPath": ".prettierrc",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
+}
