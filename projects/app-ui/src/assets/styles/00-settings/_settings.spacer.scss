@@ -1,0 +1,71 @@
+$spacer: 1rem;
+$spacer-x: $spacer;
+$spacer-y: $spacer;
+$spacers: (
+  0: (
+    x: 0,
+    y: 0
+  ),
+  1: (
+    x: (
+      $spacer-x * 0.25
+    ),
+    y: (
+      $spacer-y * 0.25
+    )
+  ),
+  2: (
+    x: (
+      $spacer-x * 0.5
+    ),
+    y: (
+      $spacer-y * 0.5
+    )
+  ),
+  3: (
+    x: (
+      $spacer-x * 1
+    ),
+    y: (
+      $spacer-y * 1
+    )
+  ),
+  4: (
+    x: (
+      $spacer-x * 1.5
+    ),
+    y: (
+      $spacer-y * 1.5
+    )
+  ),
+  5: (
+    x: (
+      $spacer-x * 2
+    ),
+    y: (
+      $spacer-y * 2
+    )
+  ),
+  6: (
+    x: (
+      $spacer-x * 3
+    ),
+    y: (
+      $spacer-y * 3
+    )
+  )
+);
+
+$inset-xs: 6px;
+$inset-s: 12px;
+$inset-m: 18px;
+$inset-l: 24px;
+$inset-xl: 30px;
+$inset-xxl: 36px;
+
+$outset-xs: 6px;
+$outset-s: 12px;
+$outset-m: 18px;
+$outset-l: 24px;
+$outset-xl: 30px;
+$outset-xxl: 36px;

@@ -1,0 +1,81 @@
+// Functions first
+@import "node_modules/bootstrap/scss/functions";
+
+// Variable overrides second
+$primary: #900;
+$enable-shadows: true;
+$enable-negative-margins: true;
+$prefix: "mo-";
+
+// Required Bootstrap imports
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/maps";
+@import "node_modules/bootstrap/scss/mixins";
+
+// Optional components
+// root color variabes are not used, including them will override material theme
+// @import "node_modules/bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/containers";
+@import "node_modules/bootstrap/scss/grid";
+
+//Bootstrap override to support margin-inline and padding-inline for rtl support
+$utilities: map-merge(
+    $utilities,
+    (
+        "margin-start":
+            map-merge(
+                map-get($utilities, "margin-start"),
+                (
+                    responsive: true,
+                    property: margin-inline-start,
+                    class: ms,
+                    values:
+                        map-merge(
+                            $spacers,
+                            (
+                                auto: auto,
+                            )
+                        ),
+                )
+            ),
+        "margin-end":
+            map-merge(
+                map-get($utilities, "margin-end"),
+                (
+                    responsive: true,
+                    property: margin-inline-end,
+                    class: me,
+                    values:
+                        map-merge(
+                            $spacers,
+                            (
+                                auto: auto,
+                            )
+                        ),
+                )
+            ),
+        "padding-end":
+            map-merge(
+                map-get($utilities, "padding-end"),
+                (
+                    responsive: true,
+                    property: padding-inline-end,
+                    class: pe,
+                    values: $spacers,
+                )
+            ),
+        "padding-start":
+            map-merge(
+                map-get($utilities, "padding-start"),
+                (
+                    responsive: true,
+                    property: padding-inline-start,
+                    class: ps,
+                    values: $spacers,
+                )
+            ),
+    )
+);
+@import "node_modules/bootstrap/scss/utilities/api";

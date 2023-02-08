@@ -1,0 +1,41 @@
+<a (click)="onclick()">switch</a>
+<div class="d-flex flex-row mb-2 flex-wrap">
+	<div *ngFor="let item of this.palettePrimary; let i = index" class="d-inline p-2" [ngStyle]="{ 'background-color': item }">
+		<span [ngStyle]="{ color: this.palettePrimary.slice().reverse()[i] }">{{ i <= 1 ? i * 50 : (i - 1) * 100 }}</span>
+		<br />
+		<span [ngStyle]="{ color: this.palettePrimary.slice().reverse()[i] }">{{ item }}</span>
+	</div>
+	<div>
+		<input #primary type="text" value="#298da5" />
+	</div>
+	<div>
+		<a (click)="regeneratePalette('primary', primary.value)">update</a>
+	</div>
+</div>
+<div class="d-flex flex-row mb-2 flex-wrap">
+	<div *ngFor="let item of this.paletteAccent; let i = index" class="d-inline p-2" [ngStyle]="{ 'background-color': item }">
+		<span [ngStyle]="{ color: this.paletteAccent.slice().reverse()[i] }">{{ i <= 1 ? i * 50 : (i - 1) * 100 }}</span>
+		<br />
+		<span [ngStyle]="{ color: this.paletteAccent.slice().reverse()[i] }">{{ item }}</span>
+	</div>
+	<div>
+		<input #accent type="text" value="#8db768" />
+	</div>
+	<div>
+		<a (click)="regeneratePalette('accent', accent.value)">update</a>
+	</div>
+</div>
+
+<div class="d-flex flex-row mb-2 flex-wrap">
+	<div *ngFor="let item of this.paletteWarn; let i = index" class="d-inline p-2" [ngStyle]="{ 'background-color': item }">
+		<span [ngStyle]="{ color: this.paletteWarn.slice().reverse()[i] }">{{ i <= 1 ? i * 50 : (i - 1) * 100 }}</span>
+		<br />
+		<span [ngStyle]="{ color: this.paletteWarn.slice().reverse()[i] }">{{ item }}</span>
+	</div>
+	<div>
+		<input #warn type="text" value="#e91e63" />
+	</div>
+	<div>
+		<a (click)="regeneratePalette('warn', warn.value)">update</a>
+	</div>
+</div>

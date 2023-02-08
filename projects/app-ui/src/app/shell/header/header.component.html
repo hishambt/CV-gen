@@ -1,0 +1,67 @@
+<mat-toolbar color="primary" class="toolbar align-items-center">
+	<div class="d-inline-block d-sm-none ms-n3">
+		<button mat-icon-button (click)="toggleDrawer.emit()"><mat-icon>menu</mat-icon></button>
+	</div>
+	<div class="header-identity d-flex flex-flex">
+		<img [src]="'./assets/img/site-identity/identity-logo-50x50.png'" class="me-1" style="height: 50px; width: 50px" />
+		<div class="d-flex flex-column">
+			<h3 class="identity-name">ecomz store</h3>
+			<span class="identity-plan mat-caption">Pro Plan</span>
+		</div>
+	</div>
+	<div class="flex-grow-1"></div>
+	<div class="header-actions d-flex flex-raw">
+		<div class="store-action me-1">
+			<a class="d-flex flex-column align-items-center" aria-label="Example icon-button with a menu">
+				<mat-icon>home</mat-icon>
+				<span class="mat-caption d-none d-sm-block">Online Store</span>
+			</a>
+		</div>
+		<div class="notifications-action mx-1">
+			<a class="d-flex flex-column align-items-center" aria-label="Example icon-button with a menu">
+				<mat-icon>home</mat-icon>
+				<span class="mat-caption d-none d-sm-block">Notifications</span>
+			</a>
+		</div>
+		<div class="support-action mx-1">
+			<a class="d-flex flex-column align-items-center" [matMenuTriggerFor]="menuSupport" aria-label="Example icon-button with a menu">
+				<mat-icon>home</mat-icon>
+				<span class="mat-caption d-none d-sm-block">Support</span>
+			</a>
+			<mat-menu #menuSupport="matMenu">
+				<button mat-menu-item>
+					<mat-icon>dialpad</mat-icon>
+					<span>Support</span>
+				</button>
+				<button mat-menu-item disabled>
+					<mat-icon>voicemail</mat-icon>
+					<span>Check voice mail</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon>notifications_off</mat-icon>
+					<span>Disable alerts</span>
+				</button>
+			</mat-menu>
+		</div>
+		<div class="profile-action ms-1">
+			<a class="d-flex flex-column align-items-center" [matMenuTriggerFor]="menuprofile" aria-label="Example icon-button with a menu">
+				<mat-icon>home</mat-icon>
+				<span class="mat-caption d-none d-sm-block">profile</span>
+			</a>
+			<mat-menu #menuprofile="matMenu">
+				<button mat-menu-item>
+					<mat-icon>dialpad</mat-icon>
+					<span>profile</span>
+				</button>
+				<button mat-menu-item disabled>
+					<mat-icon>voicemail</mat-icon>
+					<span>Check voice mail</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon>notifications_off</mat-icon>
+					<span>Disable alerts</span>
+				</button>
+			</mat-menu>
+		</div>
+	</div>
+</mat-toolbar>

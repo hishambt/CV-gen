@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+.color-picker {
+    margin-bottom: 20px;
+}
+.color-palette {
+    display: inline-block;
+    text-align: center;
+    margin-right: 20px;
+}
