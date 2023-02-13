@@ -3,7 +3,7 @@
 		<button mat-icon-button (click)="toggleDrawer.emit()"><mat-icon>menu</mat-icon></button>
 	</div>
 	<div class="header-identity d-flex flex-flex">
-		<img [src]="'./assets/img/site-identity/identity-logo-50x50.png'" class="me-1" style="height: 50px; width: 50px" />
+		<img [src]="'./assets/images/site-identity/identity-logo-50x50.png'" class="me-1" style="height: 50px; width: 50px" />
 		<div class="d-flex flex-column">
 			<h3 class="identity-name">ecomz store</h3>
 			<span class="identity-plan mat-caption">Pro Plan</span>
@@ -57,9 +57,11 @@
 					<mat-icon>voicemail</mat-icon>
 					<span>Check voice mail</span>
 				</button>
-				<button mat-menu-item>
+				<mat-divider></mat-divider>
+
+				<button mat-menu-item (click)="logout()">
 					<mat-icon>notifications_off</mat-icon>
-					<span>Disable alerts</span>
+					<span>Sign out</span>
 				</button>
 			</mat-menu>
 		</div>

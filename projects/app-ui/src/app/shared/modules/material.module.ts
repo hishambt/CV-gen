@@ -46,6 +46,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogModule } from '@angular/cdk/dialog';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
 	exports: [
@@ -105,6 +106,12 @@ import { DialogModule } from '@angular/cdk/dialog';
 				hideToggle: false,
 				expandedHeight: '50px',
 				collapsedHeight: '50px'
+			}
+		},
+		{
+			provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+			useValue: {
+				appearance: 'outline'
 			}
 		}
 	]

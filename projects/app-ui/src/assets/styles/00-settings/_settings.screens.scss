@@ -1,31 +1,10 @@
-
-// Breakpoint	
-// X-Small	None	<576px
-// Small	sm	≥576px
-// Medium	md	≥768px
-// Large	lg	≥992px
-// Extra large	xl	≥1200px
-// Extra extra large	xxl	≥1400px
-
-$screen-x-small: "x-small";
-$screen-small: "small";
-$screen-medium: "medium";
-$screen-large: "large";
-$screen-x-large: "x-large";
-$screen-x-x-large: "x-x-large";
-
-$width-x-small: 576px;
-$width-small: 576px;
-$width-medium: 768px;
-$width-large: 992px;
-$width-x-large: 1200px;
-$width-x-x-large: 1400px;
-
-$bootstrap-breakpoints: (
-  xs: $screen-x-small,
-  sm: $screen-small,
-  md: $screen-medium,
-  lg: $screen-large,
-  xl: $screen-x-large,
-  xxl: $screen-x-x-large
-);
+@include media-breakpoint-down(xs) {
+}
+@include media-breakpoint-down(sm) {
+}
+@include media-breakpoint-down(md) {
+}
+@include media-breakpoint-down(lg) {
+}
+@each $name, $glyph in $grid-breakpoints {
+}

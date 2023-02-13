@@ -110,7 +110,7 @@ $app-ui-accent: mat.define-palette($custom-accent-palette);
 $app-ui-warn: mat.define-palette($custom-warn-palette);
 
 $app-typography: mat.define-typography-config(
-    $font-family: "Arial",
+    $font-family: "Roboto",
 );
 // Define the default theme
 $light-theme: mat.define-light-theme(

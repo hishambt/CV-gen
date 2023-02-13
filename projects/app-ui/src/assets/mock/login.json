@@ -1,0 +1,5 @@
+{
+	"name": "example",
+	"email": "example@example.com",
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2V4YW1wbGUuYXV0aDAuY29tLyIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL2NhbGFuZGFyL3YxLyIsInN1YiI6InVzcl8xMjMiLCJpYXQiOjE0NTg3ODU3OTYsImV4cCI6MzYwMH0.XQNGkC28fMPlmIgjdLqu5JN5_1NnPRPeaEGnSxikhHk"
+}

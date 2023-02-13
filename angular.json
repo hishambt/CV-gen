@@ -25,6 +25,9 @@
 						"inlineStyleLanguage": "scss",
 						"allowedCommonJsDependencies": ["chroma-js"],
 						"assets": ["projects/app-ui/src/favicon.ico", "projects/app-ui/src/assets"],
+						"stylePreprocessorOptions": {
+							"includePaths": ["projects/app-ui/src/assets/styles"]
+						},
 						"styles": ["projects/app-ui/src/styles.scss"],
 						"scripts": []
 					},

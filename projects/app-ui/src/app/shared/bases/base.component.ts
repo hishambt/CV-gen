@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 import { ErrorService } from '../services/error.service';
 
 @Component({

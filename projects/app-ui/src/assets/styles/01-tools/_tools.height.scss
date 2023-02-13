@@ -1,0 +1,25 @@
+@for $i from 1 through 10 {
+    .h-#{$i*10} {
+        height: #{$i * 10} + "% !important";
+    }
+    @each $name, $glyph in $grid-breakpoints {
+        @include media-breakpoint-up($name) {
+            .h-#{$name}-#{$i*10} {
+                height: #{$i * 10} + "% !important";
+            }
+        }
+    }
+}
+
+@for $i from 1 through 10 {
+    .w-#{$i*10} {
+        width: #{$i * 10} + "% !important";
+    }
+    @each $name, $glyph in $grid-breakpoints {
+        @include media-breakpoint-up($name) {
+            .w-#{$name}-#{$i*10} {
+                width: #{$i * 10} + "% !important";
+            }
+        }
+    }
+}
