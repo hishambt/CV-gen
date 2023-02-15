@@ -6,8 +6,8 @@ import { LoginService } from 'projects/app-api/src/api/login.service';
 import { LoginCommand } from 'projects/app-api/src/model/loginCommand';
 import { LoginResponse } from 'projects/app-api/src/model/loginResponse';
 
-import { User } from '../../shared/modules/user';
-import { StorageService } from '../../shared/services/storage.service';
+import { User } from '../../shared/models/user';
+import { StorageAccessorService } from '../../shared/services/storage/storage-accessor.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnDestroy {
@@ -22,7 +22,7 @@ export class AuthService implements OnDestroy {
 
 	loginSubscription!: Subscription;
 
-	constructor(private router: Router, private storageService: StorageService, private loginService: LoginService) {}
+	constructor(private router: Router, private storageAccessorService: StorageAccessorService, private loginService: LoginService) {}
 
 	/**
 	 * Get Current User
@@ -42,7 +42,7 @@ export class AuthService implements OnDestroy {
 	 * Automatically check for user existance and update observables
 	 */
 	autoLogin(): void {
-		const userData = this.storageService.getLocalStorage(this.USER_KEY, true);
+		const userData = this.storageAccessorService.getLocalStorage(this.USER_KEY, true);
 
 		if (!userData) {
 			return;
@@ -83,7 +83,7 @@ export class AuthService implements OnDestroy {
 		this.user.next(user);
 		this.isAuthenticated.next(true);
 		this.autoLogout(decodedToken.exp * 1000);
-		this.storageService.setLocalStorage(this.USER_KEY, user, true);
+		this.storageAccessorService.setLocalStorage(this.USER_KEY, user, true);
 		// this.router.navigate(['/auth/dashboard']);
 	}
 
@@ -119,7 +119,7 @@ export class AuthService implements OnDestroy {
 	logout(): void {
 		this.user.next(null);
 		this.isAuthenticated.next(false);
-		this.storageService.removeLocalStorageKey(this.USER_KEY);
+		this.storageAccessorService.removeLocalStorageKey(this.USER_KEY);
 
 		if (this.tokenExirationTimer) {
 			clearTimeout(this.tokenExirationTimer);

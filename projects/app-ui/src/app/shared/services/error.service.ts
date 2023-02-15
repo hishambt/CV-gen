@@ -1,7 +1,7 @@
 import { ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { ProblemDetails, ValidationProblemDetails } from '../modules/problemDetails';
+import { ProblemDetails, ValidationProblemDetails } from '../models/problemDetails';
 
 @Injectable({
 	providedIn: 'root'

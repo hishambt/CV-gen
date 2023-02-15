@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 
 import { BaseComponent } from './base.component';
 import { ErrorService } from '../services/error.service';
-import { ComponentCanDeactivate } from '../modules/componentCanDeactivate';
 import { AuthService } from '../../core/services/auth.service';
+import { ComponentCanDeactivate } from '../models/componentCanDeactivate';
 
 @Component({
 	template: ''

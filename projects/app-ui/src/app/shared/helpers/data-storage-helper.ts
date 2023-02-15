@@ -20,14 +20,6 @@ export class StorageHelper {
 	}
 
 	/**
-	 * Get all local storage
-	 * @returns Local storage all
-	 */
-	public getAll() {
-		return localStorage;
-	}
-
-	/**
 	 * Check for key existance in local storage
 	 * @param key string
 	 * @returns boolean
