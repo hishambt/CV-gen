@@ -1,0 +1,31 @@
+<!-- mat-toolbar -->
+<app-header (toggleDrawer)="snav.toggle()"></app-header>
+<!-- mat-sidenav-container -->
+<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="64">
+	<mat-sidenav
+		#snav
+		[mode]="mobileQuery.matches ? 'over' : 'side'"
+		[opened]="mobileQuery.matches ? false : true"
+		[fixedInViewport]="mobileQuery.matches"
+		fixedTopGap="56"
+	>
+		<app-side-navbar></app-side-navbar>
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<div class="main-content">
+			<!-- Will be moved to separate component -->
+			<div class="container-fluid">
+				<div class="col">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Library</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+			<router-outlet></router-outlet>
+		</div>
+	</mat-sidenav-content>
+</mat-sidenav-container>

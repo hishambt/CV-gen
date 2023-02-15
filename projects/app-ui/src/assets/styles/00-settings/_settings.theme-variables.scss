@@ -1,0 +1,54 @@
+$background-color: var(--theme-background);
+$foreground-color: var(--theme-foreground);
+//#region Primary css variables
+$theme-primary-50: var(--theme-primary-50);
+$theme-primary-100: var(--theme-primary-100);
+$theme-primary-200: var(--theme-primary-200);
+$theme-primary-300: var(--theme-primary-300);
+$theme-primary-400: var(--theme-primary-400);
+$theme-primary-500: var(--theme-primary-500);
+$theme-primary-600: var(--theme-primary-600);
+$theme-primary-700: var(--theme-primary-700);
+$theme-primary-800: var(--theme-primary-800);
+$theme-primary-900: var(--theme-primary-900);
+// A100, A200, A400, and A700 are just optional shades for easy reference of how light or dark you need for the color.
+// Reference:https://levelup.gitconnected.com/defining-your-own-theme-in-angular-material-8a4a6ffad400
+$theme-primary-A100: var(--theme-primary-A100);
+$theme-primary-A200: var(--theme-primary-A200);
+$theme-primary-A400: var(--theme-primary-A400);
+$theme-primary-A700: var(--theme-primary-A700);
+//#endregion
+
+//#region Accent css variables
+$theme-accent-50: var(--theme-accent-50);
+$theme-accent-100: var(--theme-accent-100);
+$theme-accent-200: var(--theme-accent-200);
+$theme-accent-300: var(--theme-accent-300);
+$theme-accent-400: var(--theme-accent-400);
+$theme-accent-500: var(--theme-accent-500);
+$theme-accent-600: var(--theme-accent-600);
+$theme-accent-700: var(--theme-accent-700);
+$theme-accent-800: var(--theme-accent-800);
+$theme-accent-900: var(--theme-accent-900);
+$theme-accent-A100: var(--theme-accent-A100);
+$theme-accent-A200: var(--theme-accent-A200);
+$theme-accent-A400: var(--theme-accent-A400);
+$theme-accent-A700: var(--theme-accent-A700);
+//#endregion
+
+//#region Warn css variables
+$theme-warn-50: var(--theme-warn-50);
+$theme-warn-100: var(--theme-warn-100);
+$theme-warn-200: var(--theme-warn-200);
+$theme-warn-300: var(--theme-warn-300);
+$theme-warn-400: var(--theme-warn-400);
+$theme-warn-500: var(--theme-warn-500);
+$theme-warn-600: var(--theme-warn-600);
+$theme-warn-700: var(--theme-warn-700);
+$theme-warn-800: var(--theme-warn-800);
+$theme-warn-900: var(--theme-warn-900);
+$theme-warn-A100: var(--theme-warn-A100);
+$theme-warn-A200: var(--theme-warn-A200);
+$theme-warn-A400: var(--theme-warn-A400);
+$theme-warn-A700: var(--theme-warn-A700);
+//#endregion
