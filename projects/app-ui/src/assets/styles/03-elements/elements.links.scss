@@ -8,3 +8,7 @@ mark {
 a {
   cursor: pointer;
 }
+
+a.link {
+  color: var(--theme-primary-500) !important;
+}

@@ -19,7 +19,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 	//#region public
 	public savedStores: Array<Store> = [];
 	public hasSelectedStore = false;
-	public selectedStore!: Store;
+	public selectedStore: Store | null = null;
 	public enableStoreSelection = false;
 	//#endregion
 
@@ -42,12 +42,6 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 
 	override ngOnInit(): void {
 		super.ngOnInit();
-
-		this.form.patchValue({
-			name: 'store 1',
-			email: 'example@example.com',
-			password: 'p@ssw0rd'
-		});
 	}
 
 	onLoadData(): LoginCommand {
@@ -69,7 +63,18 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 
 		this.isWaiting = true;
 
-		const command = this.mapControlsToModel<LoginCommand>();
+		let command: LoginCommand;
+
+		if (this.enableStoreSelection) {
+			command = this.mapControlsToModel<LoginCommand>();
+			command.name = this.selectedStore!.storeName;
+			command.email = this.selectedStore!.emailAddress;
+		} else {
+			command = this.mapControlsToModel<LoginCommand>();
+		}
+
+		console.log(command);
+
 		const response = await lastValueFrom(this.authService.login(command));
 
 		this.isWaiting = false;
@@ -83,8 +88,23 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 		}
 	}
 
+	selectRecentStore(store: Store) {
+		this.hasSelectedStore = true;
+		this.selectedStore = store;
+	}
+
+	clearSelectRecentStore() {
+		this.hasSelectedStore = false;
+		this.selectedStore = null;
+	}
+
 	removeRecentStore(store: Store) {
 		this.authStorageService.removeEntryfromRecentlyLoggedIn(store);
 		this.savedStores = this.authStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
+	}
+
+	resetToDefaultLogin() {
+		this.hasSelectedStore = false;
+		this.enableStoreSelection = false;
 	}
 }
