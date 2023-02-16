@@ -9,7 +9,7 @@
 		"pretty-ts": "npx prettier --write projects/app-ui/src/app/**/*.ts",
 		"pretty-html": "npx prettier --write projects/app-ui/src/app/**/*.html",
 		"pretty-all": "npx prettier --write projects/app-ui/src/app/**/*.{ts,html,scss}",
-		"prepare": "husky install",
+		"prepare": "husky install && cp -a .husky/. .git/hooks/",
 		"test": "ng test",
 		"lint": "ng lint"
 	},
