@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginCommand } from 'projects/app-api/src/model/loginCommand';
 import { LoginResponse } from 'projects/app-api/src/model/loginResponse';
@@ -7,8 +8,8 @@ import { lastValueFrom } from 'rxjs';
 import { FormBaseComponent } from '../../../shared/bases/form-base.component';
 import { ErrorService } from '../../../shared/services/error.service';
 import { AuthService } from '../../services/auth.service';
-import { Store } from '../models/stores';
-import { AuthStorageService } from '../services/auth-storage.services';
+import { Store } from '../_models/stores';
+import { LoginStorageService } from '../_services/login-storage.services';
 
 @Component({
 	selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 	//#endregion
 
 	constructor(
-		private authStorageService: AuthStorageService,
+		private authStorageService: LoginStorageService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
@@ -42,6 +43,9 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 
 	override ngOnInit(): void {
 		super.ngOnInit();
+
+		this.formControls['password'].setValidators([Validators.required]);
+		this.formControls['password'].updateValueAndValidity();
 	}
 
 	onLoadData(): LoginCommand {
@@ -88,23 +92,46 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 		}
 	}
 
-	selectRecentStore(store: Store) {
+	public selectRecentStore(store: Store): void {
 		this.hasSelectedStore = true;
 		this.selectedStore = store;
+		this.toggleFormValidation();
 	}
 
-	clearSelectRecentStore() {
+	public clearSelectRecentStore(): void {
 		this.hasSelectedStore = false;
 		this.selectedStore = null;
 	}
 
-	removeRecentStore(store: Store) {
+	public removeRecentStore(store: Store): void {
 		this.authStorageService.removeEntryfromRecentlyLoggedIn(store);
 		this.savedStores = this.authStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
 	}
 
-	resetToDefaultLogin() {
+	public resetToDefaultLogin(): void {
 		this.hasSelectedStore = false;
 		this.enableStoreSelection = false;
+		this.toggleFormValidation();
+	}
+
+	private toggleFormValidation() {
+		const name = this.formControls['name'];
+		const email = this.formControls['email'];
+
+		if (this.enableStoreSelection) {
+			name.clearValidators();
+			name.updateValueAndValidity();
+
+			email.clearValidators();
+			email.updateValueAndValidity();
+		} else {
+			name.setValidators([Validators.required]);
+			name.updateValueAndValidity();
+
+			email.setValidators([Validators.required, Validators.email]);
+			email.updateValueAndValidity();
+		}
+
+		this.form.reset();
 	}
 }

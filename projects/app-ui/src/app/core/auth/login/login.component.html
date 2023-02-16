@@ -2,7 +2,11 @@
 	<div class="row d-flex align-items-sm-center">
 		<div class="col-sm-4 col-md-3 bg-primary-500 bubble-bg">
 			<div class="d-flex flex-column vh-auto vh-sm-100">
-				<app-svg-loader class="identity-logo mt-3 mt-sm-4 mx-auto" [name]="'logoEcomzEn'" width="100px"></app-svg-loader>
+				<app-svg-loader
+					class="position-relative position-sm-absolute text-center top-0 start-0 end-0 mt-3 mt-sm-5 mx-auto"
+					[name]="'logoEcomzEn'"
+					width="130px"
+				></app-svg-loader>
 				<h3 class="text-center position-relative my-4 my-sm-auto color-primary-100" style="z-index: 1">
 					Taking your ecommerce journey to the next level!
 				</h3>
@@ -11,7 +15,7 @@
 		<div class="col-sm-8 col-md-9">
 			<div class="container">
 				<div class="row align-items-center justify-content-center">
-					<div class="col-md-7 col-lg-6 mt-4 mt-sm-0">
+					<div class="col-md-7 col-lg-6 col-xxl-5 mt-4 mt-sm-0">
 						<h1>Sign In</h1>
 						<h3 *ngIf="enableStoreSelection && !hasSelectedStore">Select an Account</h3>
 						<h3 *ngIf="enableStoreSelection && hasSelectedStore">Enter Credentials</h3>
@@ -51,12 +55,14 @@
 								<label>Name</label>
 								<mat-form-field class="d-block">
 									<input type="text" matInput formControlName="name" placeholder="Store Name" />
+									<mat-error *ngIf="formControls['name'].hasError('required')"> Store Name required</mat-error>
 								</mat-form-field>
 							</div>
 							<div class="form-group" *ngIf="!hasSelectedStore">
 								<mat-form-field class="d-block">
 									<mat-label>Email</mat-label>
 									<input type="email" matInput formControlName="email" placeholder="example@example.com" />
+									<mat-error *ngIf="formControls['email'].hasError('required')"> Email required</mat-error>
 								</mat-form-field>
 							</div>
 							<div class="form-group">
@@ -70,6 +76,7 @@
 										name="abcPassword"
 										autocomplete="disabled"
 									/>
+									<mat-error *ngIf="formControls['password'].hasError('required')"> Password required </mat-error>
 								</mat-form-field>
 							</div>
 							<div class="form-group">

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { StorageAccessorService } from '../../../shared/services/storage/storage-accessor.service';
-import { Store } from '../models/stores';
+import { Store } from '../_models/stores';
 
 @Injectable()
-export class AuthStorageService {
-	private LOGGED_IN_STORES_KEY = 'recentlyLoggedIn';
+export class LoginStorageService {
+	private readonly LOGGED_IN_STORES_KEY = 'recentlyLoggedIn';
 
 	constructor(private storageAccessorService: StorageAccessorService) {}
 

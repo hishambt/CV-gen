@@ -19,6 +19,9 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	data!: TData;
 	form: FormGroup;
 
+	/**
+	 * @description Set form object to build the FormControl
+	 */
 	abstract onLoadData(): TData;
 	abstract submitRecord(status?: string): Promise<void>;
 
@@ -64,8 +67,10 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 		super.ngOnDestroy();
 	}
 
-	//  Getter for access to form controls
-	get f() {
+	/**
+	 * Return this.form.controls
+	 */
+	get formControls() {
 		return this.form.controls;
 	}
 
