@@ -1,5 +1,12 @@
 {
-	"identity": {
-		"name": "إيكومز"
+	"core": {
+		"auth": {
+			"login": {
+				"title": "تسجيل الدخول"
+			},
+			"register": {
+				"title": "إنشاء حساب"
+			}
+		}
 	}
 }

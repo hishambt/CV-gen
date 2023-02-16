@@ -1,5 +1,12 @@
 {
-	"identity": {
-		"name": "eComz"
+	"core": {
+		"auth": {
+			"login": {
+				"title": "Sign In"
+			},
+			"register": {
+				"title": "Create an account"
+			}
+		}
 	}
 }

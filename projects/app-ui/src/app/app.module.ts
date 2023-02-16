@@ -17,7 +17,12 @@ import { ShellModule } from './shell/shell.module';
 // }
 
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
-	return new MultiTranslateHttpLoader(_httpBackend, ['/assets/i18n/core/', '/assets/i18n/shared/']);
+	return new MultiTranslateHttpLoader(_httpBackend, [
+		'/assets/i18n/core/',
+		'/assets/i18n/features/',
+		'/assets/i18n/shared/',
+		'/assets/i18n/shell/'
+	]);
 }
 
 export function initAppAuthenticationService(authService: AuthService) {

@@ -12,7 +12,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
 	declarations: [SafePipe, SvgLoaderComponent, AvatarComponent],
-	imports: [CommonModule, AvatarModule],
+	imports: [CommonModule, TranslateModule.forChild(), AvatarModule],
 	exports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModule, TranslateModule, SvgLoaderComponent, AvatarComponent, SafePipe],
 	providers: []
 })

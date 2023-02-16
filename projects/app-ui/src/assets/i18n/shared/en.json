@@ -1,5 +1,9 @@
 {
-	"home": {
-		"title": "الرئيسية"
+	"shared": {
+		"components": {
+			"avatar": {
+				"title": "Profile image icon"
+			}
+		}
 	}
 }

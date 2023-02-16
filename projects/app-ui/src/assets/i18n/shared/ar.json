@@ -1,5 +1,9 @@
 {
-	"home": {
-		"title": "Home"
+	"shared": {
+		"components": {
+			"avatar": {
+				"title": "أيقونة صورة الملف الشخصي"
+			}
+		}
 	}
 }
