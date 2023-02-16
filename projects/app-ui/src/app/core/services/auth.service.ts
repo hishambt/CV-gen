@@ -78,7 +78,7 @@ export class AuthService implements OnDestroy {
 	handleAuthentication(name: string, email: string, token: string) {
 		const decodedToken = this.parseToken(token);
 		const expirationDate = new Date(new Date().getTime() + decodedToken.exp * 1000);
-		console.log(expirationDate);
+		console.log(expirationDate); //
 		const user = new User(name, email, token, expirationDate);
 		this.user.next(user);
 		this.isAuthenticated.next(true);

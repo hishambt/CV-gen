@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterContentInit, Component, Inject, OnInit } from '@angular/core';
+import { AfterContentInit, Component, Inject } from '@angular/core';
 import * as chroma from 'chroma-js';
 import { InterpolationMode } from 'chroma-js';
 
@@ -8,7 +8,7 @@ import { InterpolationMode } from 'chroma-js';
 	templateUrl: './white-labeling-theme.component.html',
 	styleUrls: ['./white-labeling-theme.component.scss']
 })
-export class WhiteLabelingThemeComponent implements OnInit, AfterContentInit {
+export class WhiteLabelingThemeComponent implements AfterContentInit {
 	palettePrimary: string[] = [];
 	paletteAccent: string[] = [];
 	paletteWarn: string[] = [];
@@ -30,10 +30,6 @@ export class WhiteLabelingThemeComponent implements OnInit, AfterContentInit {
 		this.generatePalette(this.inputs, 'primary');
 		this.generatePalette(this.inputs2, 'accent');
 		this.generatePalette(this.inputs3, 'warn');
-	}
-
-	ngOnInit(): void {
-		console.log('test');
 	}
 
 	onclick() {
@@ -150,26 +146,26 @@ export class WhiteLabelingThemeComponent implements OnInit, AfterContentInit {
 				break;
 		}
 
-		// primary logs
-		console.log('primary inputs: ', inputs);
-		console.log('primary colors: ', colors);
-		console.log('primary user colors: ', userColors);
-		console.log('primary domain: ', domain);
-		console.log('primary palette : ', this.palettePrimary);
+		// // primary logs
+		// console.log('primary inputs: ', inputs);
+		// console.log('primary colors: ', colors);
+		// console.log('primary user colors: ', userColors);
+		// console.log('primary domain: ', domain);
+		// console.log('primary palette : ', this.palettePrimary);
 
-		// accent logs
-		console.log('accent inputs: ', inputs);
-		console.log('accent colors: ', colors);
-		console.log('accent user colors: ', userColors);
-		console.log('accent domain: ', domain);
-		console.log('accent palette : ', this.paletteAccent);
+		// // accent logs
+		// console.log('accent inputs: ', inputs);
+		// console.log('accent colors: ', colors);
+		// console.log('accent user colors: ', userColors);
+		// console.log('accent domain: ', domain);
+		// console.log('accent palette : ', this.paletteAccent);
 
-		// warn logs
-		console.log('warn inputs: ', inputs);
-		console.log('warn colors: ', colors);
-		console.log('warn user colors: ', userColors);
-		console.log('warn domain: ', domain);
-		console.log('warn palette : ', this.paletteWarn);
+		// // warn logs
+		// console.log('warn inputs: ', inputs);
+		// console.log('warn colors: ', colors);
+		// console.log('warn user colors: ', userColors);
+		// console.log('warn domain: ', domain);
+		// console.log('warn palette : ', this.paletteWarn);
 	}
 
 	/**

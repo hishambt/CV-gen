@@ -1,10 +1,8 @@
 {
-  "root": true,
-  "plugins": ["import", "unused-imports", "deprecation"],
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "overrides": [
+	"root": true,
+	"plugins": ["import", "unused-imports", "deprecation"],
+	"ignorePatterns": ["projects/**/*"],
+	"overrides": [
 		{
 			"files": ["*.ts"],
 			"parserOptions": {
