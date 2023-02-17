@@ -29,7 +29,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 	//#endregion
 
 	constructor(
-		private authStorageService: LoginStorageService,
+		private loginStorageService: LoginStorageService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
@@ -37,7 +37,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 	) {
 		super(errorService, authService, router, route);
 
-		this.savedStores = this.authStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
+		this.savedStores = this.loginStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
 		this.enableStoreSelection = this.savedStores.length > 0;
 	}
 
@@ -85,7 +85,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 
 		if (response) {
 			const tempStore: Store = { storeName: command.name, emailAddress: command.email, storeImage: '' };
-			this.authStorageService.addToRecentlyLoggedIn(tempStore);
+			this.loginStorageService.addToRecentlyLoggedIn(tempStore);
 
 			this.authService.handleAuthentication(response.name, response.email, response.token);
 			this.router.navigate(['/home']);
@@ -104,8 +104,8 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 	}
 
 	public removeRecentStore(store: Store): void {
-		this.authStorageService.removeEntryfromRecentlyLoggedIn(store);
-		this.savedStores = this.authStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
+		this.loginStorageService.removeEntryfromRecentlyLoggedIn(store);
+		this.savedStores = this.loginStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
 	}
 
 	public resetToDefaultLogin(): void {
