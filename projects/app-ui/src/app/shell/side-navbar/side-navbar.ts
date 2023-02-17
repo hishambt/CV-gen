@@ -22,10 +22,24 @@ export const items: Array<IMenuItem> = [
 		routerLink: '/home'
 	},
 	{
-		text: 'Customer',
+		text: 'Orders',
+		icon: 'inventory_2',
+		selected: false,
+		expanded: false,
+		children: [
+			{
+				text: 'All orders',
+				icon: 'category',
+				selected: false,
+				routerLink: '/orders'
+			}
+		]
+	},
+	{
+		text: 'Customers',
 		icon: 'people',
 		selected: false,
-		routerLink: '/customer/manage'
+		routerLink: '/customers'
 	},
 	{
 		text: 'Supplier',

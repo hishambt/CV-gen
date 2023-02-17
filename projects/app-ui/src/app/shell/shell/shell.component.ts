@@ -1,5 +1,5 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
 	selector: 'app-shell',
@@ -7,6 +7,7 @@ import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 	styleUrls: ['./shell.component.scss']
 })
 export class ShellComponent implements OnDestroy {
+	@ViewChild('componentContainer', { read: ViewContainerRef, static: true })
 	mobileQuery: MediaQueryList;
 
 	private _mobileQueryListener: () => void;
@@ -20,4 +21,7 @@ export class ShellComponent implements OnDestroy {
 	ngOnDestroy(): void {
 		this.mobileQuery.removeEventListener('change', this._mobileQueryListener, false);
 	}
+
+	closeDrawer() {}
+	onSubmit() {}
 }
