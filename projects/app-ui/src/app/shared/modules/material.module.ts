@@ -47,6 +47,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogModule } from '@angular/cdk/dialog';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+//addons
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
 	exports: [
@@ -97,7 +99,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 		OverlayModule,
 		PortalModule,
 		ScrollingModule,
-		DialogModule
+		DialogModule,
+		// addon
+		NgxMatSelectSearchModule
 	],
 	providers: [
 		{

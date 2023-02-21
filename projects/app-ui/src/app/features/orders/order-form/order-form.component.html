@@ -1,37 +1,81 @@
 <div class="container-fluid">
+	<app-breadcrumb></app-breadcrumb>
 	<div class="row">
-		<div class="col">
+		<div class="col-9">
 			<mat-card>
-				<h1>Create Order</h1>
-				<form [formGroup]="form">
+				<div class="d-flex justify-content-between">
+					<h1>Create Order</h1>
+					<mat-chip-list aria-label="Fish selection">
+						<mat-chip>Draft</mat-chip>
+						<mat-chip>Created: 21-02-2023 . 12:52 PM</mat-chip>
+					</mat-chip-list>
+				</div>
+				<mat-divider></mat-divider>
+				<form [formGroup]="form" class="pt-4">
+					<div class="row">
+						<div class="col-6">
+							<app-customers-dropdown
+								#customer
+								[parentForm]="form"
+								[controlName]="'customer'"
+								[label]="'Select Customer'"
+								(valueChange)="customerValueChange($event)"
+							></app-customers-dropdown>
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="col">
 							<mat-form-field class="d-block">
-								<mat-label>Order number</mat-label>
-								<input type="text" matInput formControlName="orderNumber" placeholder="Order number" />
-								<!-- <mat-error *ngIf="formControls['name'].hasError('required')"> Store Name required</mat-error> -->
+								<mat-label>Channel</mat-label>
+								<input type="text" matInput formControlName="channel" placeholder="Order type" readonly />
+								<!-- <mat-error *ngIf="formControls['email'].hasError('required')"> Email required</mat-error> -->
+							</mat-form-field>
+
+							<mat-form-field class="d-block">
+								<mat-label>Currency</mat-label>
+								<input type="text" matInput formControlName="currency" placeholder="Order type" readonly />
 							</mat-form-field>
 						</div>
 						<div class="col">
 							<mat-form-field class="d-block">
-								<mat-label>Order type</mat-label>
-								<input type="text" matInput formControlName="orderType" placeholder="Order type" />
+								<mat-label>Note</mat-label>
+								<textarea
+									type="text"
+									matInput
+									formControlName="note"
+									multiple
+									placeholder="Order type"
+									style="height: 90px"
+								></textarea>
 								<!-- <mat-error *ngIf="formControls['email'].hasError('required')"> Email required</mat-error> -->
 							</mat-form-field>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col"></div>
-						<div class="col">
-							<a class="link">Create contact</a>
-						</div>
-					</div>
-
-					<div class="form-group">
-						<button mat-raised-button color="primary" (click)="submitRecord()">Save</button>
-					</div>
 				</form>
 			</mat-card>
+		</div>
+		<div class="col-3">
+			<mat-card *ngIf="false"></mat-card>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-9">
+			<app-form-action-bar
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-flat-button',
+						color: 'primary',
+						text: 'Save and Close',
+						options: [{ text: 'Save and New' }]
+					},
+					{ visible: true, disabled: false, class: '', color: 'accent', text: 'Cancel' }
+				]"
+				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
 		</div>
 	</div>
 </div>

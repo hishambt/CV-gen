@@ -13,12 +13,12 @@ const routes: Routes = [
 	{
 		path: 'add',
 		component: CustomerFormComponent,
-		data: { path: 'add' }
+		data: { mode: 'add' }
 	},
 	{
 		path: 'edit',
 		component: CustomerFormComponent,
-		data: { path: 'edit' }
+		data: { mode: 'edit' }
 	},
 	{
 		path: 'view',

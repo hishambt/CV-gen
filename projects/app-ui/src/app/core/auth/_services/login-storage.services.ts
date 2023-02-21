@@ -6,9 +6,7 @@ import { Store } from '../_models/stores';
 @Injectable()
 export class LoginStorageService {
 	private readonly LOGGED_IN_STORES_KEY = 'recentlyLoggedIn';
-
 	constructor(private storageAccessorService: StorageAccessorService) {}
-
 	gemoveAllEntriesFromRecentlyLoggedIn() {
 		return this.storageAccessorService.getLocalStorage(this.LOGGED_IN_STORES_KEY, true);
 	}

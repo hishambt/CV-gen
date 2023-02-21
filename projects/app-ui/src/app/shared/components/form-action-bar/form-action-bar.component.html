@@ -1,0 +1,65 @@
+<div class="d-grid gap-2 d-md-flex justify-content-between">
+	<div class="start-actions">
+		<ng-container *ngFor="let action of startButtons!; let isLast = last">
+			<button
+				*ngIf="action?.visible"
+				mat-button
+				[color]="action?.color"
+				class="mb-2 {{ action?.class }}"
+				[ngClass]="{
+					'split-button-left': action?.options && !isDrawerMode,
+					'me-3': (!action?.options && !isLast) || (isDrawerMode && !isLast)
+				}"
+				[disabled]="action?.disabled"
+				(click)="onActionSubmit(action?.text)"
+			>
+				{{ action?.text }}
+			</button>
+			<button
+				*ngIf="action.options && !isDrawerMode && action?.visible"
+				mat-button
+				[color]="action?.color"
+				class="split-button-right mb-2 me-3"
+				[ngClass]="action?.class"
+				[disabled]="action?.disabled"
+				[matMenuTriggerFor]="menu"
+			>
+				<mat-icon aria-hidden="false" aria-label="Example home icon">expand_more</mat-icon>
+			</button>
+
+			<mat-menu #menu="matMenu" xPosition="before">
+				<button *ngFor="let option of action?.options" mat-menu-item (click)="onActionSubmit(option?.text)">{{ option?.text }}</button>
+			</mat-menu>
+		</ng-container>
+	</div>
+	<div class="end-actions">
+		<ng-container *ngFor="let action of endButtons!; let isLast = last">
+			<button
+				*ngIf="action?.visible"
+				mat-button
+				[color]="action?.color"
+				class="mb-2 {{ action?.class }}"
+				[ngClass]="{ 'split-button-left': action?.options && !isDrawerMode, 'me-3': !action?.options && !isLast }"
+				[disabled]="action?.disabled"
+				(click)="onActionSubmit(action?.text)"
+			>
+				{{ action?.text }}
+			</button>
+			<button
+				*ngIf="action.options && !isDrawerMode && action?.visible"
+				mat-button
+				[color]="action?.color"
+				class="split-button-right mb-2 {{ action?.class }}"
+				[ngClass]="{ 'me-3': !isLast }"
+				[disabled]="action?.disabled"
+				[matMenuTriggerFor]="menu"
+			>
+				<mat-icon aria-hidden="false" aria-label="Example home icon">expand_more</mat-icon>
+			</button>
+
+			<mat-menu #menu="matMenu" xPosition="before">
+				<button *ngFor="let option of action?.options" mat-menu-item (click)="onActionSubmit(option?.text)">{{ option?.text }}</button>
+			</mat-menu>
+		</ng-container>
+	</div>
+</div>

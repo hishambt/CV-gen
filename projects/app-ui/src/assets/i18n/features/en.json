@@ -1,6 +1,7 @@
 {
 	"features": {
 		"home": {},
+		"customers": {},
 		"control-panel": {
 			"white-labeling": {}
 		}

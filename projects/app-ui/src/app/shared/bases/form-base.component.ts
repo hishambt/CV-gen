@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,9 +15,12 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	isDirty = false;
 	isLoadingFailed = false;
 	showValidation = false;
+	isDrawerMode = false;
 	validationMessages = new Map<string, string[]>([]);
 	data!: TData;
 	form: FormGroup;
+	formMode: 'edit' | 'add' = 'add';
+	@Output() closeDrawer = new EventEmitter();
 
 	/**
 	 * @description Set form object to build the FormControl
@@ -32,6 +35,10 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 			errors.forEach((error: any) => {
 				this.validationMessages.set(error.key, error.value);
 			});
+		});
+
+		this.route.data.subscribe((data) => {
+			this.formMode = data['mode'];
 		});
 
 		this.form = new FormGroup({});
@@ -94,7 +101,24 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	}
 
 	goBack(): void {
-		this.router.navigate(['../'], { relativeTo: this.route });
+		if (!this.isDrawerMode) {
+			this.router.navigate(['../'], { relativeTo: this.route });
+		} else {
+			this.closeSideDrawer();
+		}
+	}
+
+	closeSideDrawer(value?: any) {
+		this.closeDrawer.emit(value);
+	}
+
+	/**
+	 * Reload same route
+	 */
+	reloadRoute() {
+		// Must me used with onSameUrlNavigation to reload same url
+		this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+		this.router.navigate([this.router.url]);
 	}
 
 	@HostListener('window:beforeunload')

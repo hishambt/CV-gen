@@ -19,6 +19,7 @@
 				"comma-dangle": ["error", "never"],
 				"curly": ["error"],
 				"deprecation/deprecation": "warn",
+				"no-debugger": "warn",
 				"padding-line-between-statements": [
 					"error",
 					{ "blankLine": "always", "prev": "*", "next": ["for", "while", "export", "if", "return"] },

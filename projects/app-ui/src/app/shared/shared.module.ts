@@ -9,11 +9,47 @@ import { MaterialModule } from './modules/material.module';
 import { SafePipe } from './pipes/safe.pipe';
 import { SvgLoaderComponent } from './components/svg-loader/svg-loader.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { CustomersDropdownComponent } from './components/form-fields/customers-dropdown/customers-dropdown.component';
+import { FormActionBarComponent } from './components/form-action-bar/form-action-bar.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
-	declarations: [SafePipe, SvgLoaderComponent, AvatarComponent],
-	imports: [CommonModule, TranslateModule.forChild(), AvatarModule],
-	exports: [CommonModule, RouterModule, ReactiveFormsModule, MaterialModule, TranslateModule, SvgLoaderComponent, AvatarComponent, SafePipe],
+	declarations: [
+		SafePipe,
+		SvgLoaderComponent,
+		// shared Components
+		AvatarComponent,
+		FormActionBarComponent,
+		BreadcrumbComponent,
+		// shared dropdowns
+		CustomersDropdownComponent
+	],
+	imports: [
+		CommonModule,
+		TranslateModule.forChild(),
+		ReactiveFormsModule,
+		MaterialModule,
+		// MaterialAddonsModule,
+		AvatarModule
+	],
+	exports: [
+		CommonModule,
+		RouterModule,
+		ReactiveFormsModule,
+		MaterialModule,
+		// MaterialAddonsModule,
+		// Addons
+		TranslateModule,
+		SvgLoaderComponent,
+		// shared exported Components
+		AvatarComponent,
+		FormActionBarComponent,
+		BreadcrumbComponent,
+		// shared exported Pipes
+		SafePipe,
+		// shared exported dropdowns
+		CustomersDropdownComponent
+	],
 	providers: []
 })
 export class SharedModule {}

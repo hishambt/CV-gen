@@ -1,8 +1,7 @@
-import { Address } from "./address";
+import { Address } from './address';
 
 export interface Customer {
-    id?: string;
-    name: string;
-    trips: number;
-    address: Address;
+	id?: string;
+	firstName: string;
+	lastName: string;
 }

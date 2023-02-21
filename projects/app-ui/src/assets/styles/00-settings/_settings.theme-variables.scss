@@ -1,5 +1,13 @@
+// --theme-background: #f0f0f0;
+// --theme-foreground: #e4e4e4;
 $background-color: var(--theme-background);
 $foreground-color: var(--theme-foreground);
+
+$background-dark-color: #303030;
+$foreground-dark-color: #424242;
+
+$dark-primary-text: #000000;
+$light-primary-text: #f0f0f0;
 //#region Primary css variables
 $theme-primary-50: var(--theme-primary-50);
 $theme-primary-100: var(--theme-primary-100);
@@ -54,8 +62,7 @@ $theme-warn-A700: var(--theme-warn-A700);
 //#endregion
 
 // Palettes
-$dark-primary-text: #000000;
-$light-primary-text: #f0f0f0;
+
 $custom-primary-palette: (
     50: $theme-primary-50,
     100: $theme-primary-100,

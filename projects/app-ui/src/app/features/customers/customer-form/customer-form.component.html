@@ -1,8 +1,11 @@
 <div class="container-fluid">
+	<app-breadcrumb></app-breadcrumb>
 	<div class="row">
-		<div class="col">
+		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<mat-card>
 				<h1>Create Customer</h1>
+				{{ isDrawerMode }}
+				{{ formMode }}
 				<form [formGroup]="form">
 					<div class="row">
 						<div class="col">
@@ -20,12 +23,28 @@
 							</mat-form-field>
 						</div>
 					</div>
-
-					<div class="form-group">
-						<button mat-raised-button color="primary" (click)="submitRecord()">Save</button>
-					</div>
 				</form>
 			</mat-card>
+		</div>
+	</div>
+	<div class="row">
+		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
+			<app-form-action-bar
+				[isDrawerMode]="isDrawerMode"
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-flat-button',
+						color: 'primary',
+						text: 'Save and Close',
+						options: [{ text: 'Save and New' }]
+					},
+					{ visible: true, disabled: false, class: 'mat-stroked-button', color: 'accent', text: 'Cancel' }
+				]"
+				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
 		</div>
 	</div>
 </div>

@@ -4,6 +4,12 @@ import { isPlatformBrowser } from '@angular/common';
 import { StorageHelper } from '../../helpers/data-storage-helper';
 import { CookieHelper } from '../../helpers/data-cookie-helper';
 
+/**
+ * This service is the only data storage accessor available in the solution
+ * No direct Feature access to this service
+ *
+ * @description
+ */
 @Injectable({ providedIn: 'root' })
 export class StorageAccessorService {
 	private storageHelper: StorageHelper = new StorageHelper();

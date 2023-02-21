@@ -2,8 +2,6 @@
 <app-header (toggleDrawer)="sideNav.toggle()"></app-header>
 <!-- mat-sidenav-container -->
 <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="64">
-	<mat-drawer> ------ </mat-drawer>
-
 	<mat-sidenav
 		#sideNav
 		position="start"
@@ -18,26 +16,15 @@
 
 	<mat-sidenav-content>
 		<div class="main-content">
-			<!-- Will be moved to separate component -->
-			<div class="container-fluid">
-				<div class="col">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Library</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
 			<router-outlet></router-outlet>
 		</div>
-		<mat-drawer #drawerEnd position="end" mode="over" fixedTopGap="56" opened>
-			Drawer content
-			<template #componentContainer> </template>
+
+		<mat-drawer #drawerEnd position="end" mode="over" fixedTopGap="56" opened="false">
+			<template appDrawerHost> </template>
 		</mat-drawer>
 	</mat-sidenav-content>
 	<ng-template #dialogActions>
-		<button mat-button color="warn" (click)="closeDrawer()">Discard</button>
+		<button mat-button color="warn" (click)="toggleDrawer()">Discard</button>
 		<button mat-button color="primary" (click)="onSubmit()">Save</button>
 	</ng-template>
 </mat-sidenav-container>
