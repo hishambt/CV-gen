@@ -19,9 +19,13 @@
 			<router-outlet></router-outlet>
 		</div>
 
-		<mat-drawer #drawerEnd position="end" mode="over" fixedTopGap="56" opened="false">
+		<mat-drawer #drawerEnd position="end" mode="over" fixedTopGap="56" opened="false" hasBackdrop="true">
 			<template appDrawerHost> </template>
 		</mat-drawer>
+
+		<ng-container *ngFor="let component of drawerComponent; let i = index">
+			<app-drawer [index]="component.index" [componentName]="component.name"></app-drawer>
+		</ng-container>
 	</mat-sidenav-content>
 	<ng-template #dialogActions>
 		<button mat-button color="warn" (click)="toggleDrawer()">Discard</button>

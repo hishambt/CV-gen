@@ -1,15 +1,12 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, Type, HostListener, ComponentRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, Type, ComponentRef } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
 
 import { CustomerFormComponent } from '../../features/customers/customer-form/customer-form.component';
 import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
+import { ComponentItem } from '../../shared/models/componentItem';
 import { ShellDrawerSharingService } from '../../shared/services/shell-drawer-sharging.service';
-
-export class ComponentItem {
-	constructor(public component: Type<any>) {}
-}
 
 @Component({
 	selector: 'app-shell',
@@ -22,6 +19,7 @@ export class ShellComponent implements OnInit, OnDestroy {
 	mobileQuery: MediaQueryList;
 	openCreateCustomerDrawerSubscription!: Subscription;
 	componentRef!: ComponentRef<any>;
+	drawerComponent: any[] = [];
 
 	private _mobileQueryListener: () => void;
 
@@ -29,6 +27,10 @@ export class ShellComponent implements OnInit, OnDestroy {
 		this.mobileQuery = media.matchMedia('(max-width: 576px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);
+
+		this.shellDrawerSharingService.drawerCompoents$.subscribe((res) => {
+			this.drawerComponent = res;
+		});
 	}
 
 	ngOnInit(): void {
@@ -68,13 +70,13 @@ export class ShellComponent implements OnInit, OnDestroy {
 
 	onSubmit() {}
 
-	@HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
-		this.onSubmit();
-	}
+	// @HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
+	// 	this.onSubmit();
+	// }
 
-	@HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
-		if (this.drawer.opened) {
-			this.toggleDrawer();
-		}
-	}
+	// @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
+	// 	if (this.drawer.opened) {
+	// 		this.toggleDrawer();
+	// 	}
+	// }
 }

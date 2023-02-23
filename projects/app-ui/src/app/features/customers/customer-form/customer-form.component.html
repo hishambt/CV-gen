@@ -4,8 +4,9 @@
 		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<mat-card>
 				<h1>Create Customer</h1>
-				{{ isDrawerMode }}
-				{{ formMode }}
+				isDrawerMode:{{ isDrawerMode }} <br />
+				formMode:{{ formMode }} <br />
+				index:{{ index }}
 				<form [formGroup]="form">
 					<div class="row">
 						<div class="col">

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,12 +15,10 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	isDirty = false;
 	isLoadingFailed = false;
 	showValidation = false;
-	isDrawerMode = false;
 	validationMessages = new Map<string, string[]>([]);
 	data!: TData;
 	form: FormGroup;
 	formMode: 'edit' | 'add' = 'add';
-	@Output() closeDrawer = new EventEmitter();
 
 	/**
 	 * @description Set form object to build the FormControl
@@ -101,15 +99,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	}
 
 	goBack(): void {
-		if (!this.isDrawerMode) {
-			this.router.navigate(['../'], { relativeTo: this.route });
-		} else {
-			this.closeSideDrawer();
-		}
-	}
-
-	closeSideDrawer(value?: any) {
-		this.closeDrawer.emit(value);
+		this.router.navigate(['../'], { relativeTo: this.route });
 	}
 
 	/**

@@ -45,7 +45,7 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 		});
 
 		//TODO: missing un subscribe
-		this.shellDrawerSharingService.publishDataOnClose$.subscribe((data: any) => {
+		this.shellDrawerSharingService.onCloseComponentInDrawer$.subscribe((data: any) => {
 			if (data) {
 				this.options.unshift({ name: data.firstName, id: '00006' });
 				this.filteredBanks.next(this.options.slice());
@@ -65,7 +65,8 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 			lastName: 'test'
 		};
 
-		this.shellDrawerSharingService.openCreateCustomerDrawerData(customer);
+		// this.shellDrawerSharingService.openCreateCustomerForm(customer);
+		this.shellDrawerSharingService.openComponentInDrawer('CustomerFormComponent');
 	}
 
 	onSelectionChange(event: any) {

@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Customer } from 'projects/app-api/src/model/customer';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { FormBaseComponent } from '../../../shared/bases/form-base.component';
+import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
 import { ErrorService } from '../../../shared/services/error.service';
+import { ShellDrawerSharingService } from '../../../shared/services/shell-drawer-sharging.service';
 import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
@@ -14,7 +15,7 @@ import { SharedModule } from '../../../shared/shared.module';
 	styleUrls: ['./customer-form.component.scss'],
 	imports: [SharedModule]
 })
-export class CustomerFormComponent extends FormBaseComponent<any> implements OnInit {
+export class CustomerFormComponent extends DrawerBaseComponent<any> implements OnInit {
 	@Input() customer!: Customer;
 
 	onLoadData() {
@@ -24,8 +25,14 @@ export class CustomerFormComponent extends FormBaseComponent<any> implements OnI
 		};
 	}
 
-	constructor(errorService: ErrorService, authService: AuthService, router: Router, route: ActivatedRoute) {
-		super(errorService, authService, router, route);
+	constructor(
+		shellDrawerSharingService: ShellDrawerSharingService,
+		errorService: ErrorService,
+		authService: AuthService,
+		router: Router,
+		route: ActivatedRoute
+	) {
+		super(shellDrawerSharingService, errorService, authService, router, route);
 	}
 
 	override ngOnInit(): void {
