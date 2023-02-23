@@ -48,4 +48,47 @@ export class LoginService {
 			observe: observe
 		});
 	}
+
+	public login(body: LoginCommand, observe?: 'body'): Observable<any> {
+		let bodyParams =
+			'username=' +
+			body.email +
+			'&password=' +
+			body.password +
+			'&store_name=' +
+			body.name +
+			'&grant_type=password&remember_me=' +
+			body.rememberMe;
+
+		let config;
+
+		config = {
+			headers: {
+				'content-type': 'application/x-www-form-urlencoded'
+			}
+		};
+
+		return this.httpClient.post(`${this.basePath}/token`, bodyParams, config);
+	}
+
+	public refreshToken(refreshToken: string, observe?: 'body'): Observable<any> {
+		let bodyParams = 'refresh_token=' + refreshToken + '&grant_type=refresh_token&remember_me=false';
+
+		let config;
+
+		config = {
+			headers: {
+				'content-type': 'application/x-www-form-urlencoded'
+			}
+		};
+
+		return this.httpClient.post(`${this.basePath}/token`, bodyParams, config);
+	}
+
+	public getLoginInfo(body?: any, observe?: 'body'): Observable<any> {
+		return this.httpClient.request<LoginResponse>('get', `${this.basePath}/Account/AuthenticationInfo`, {
+			headers: this.defaultHeaders,
+			observe: observe
+		});
+	}
 }

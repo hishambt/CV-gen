@@ -16,7 +16,7 @@ import { LoginStorageService } from '../_services/login-storage.services';
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends FormBaseComponent<LoginCommand> implements OnInit, OnDestroy {
+export class LoginComponent extends FormBaseComponent<any> implements OnInit, OnDestroy {
 	//#region public
 	public savedStores: Array<Store> = [];
 	public hasSelectedStore = false;
@@ -46,6 +46,9 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 
 		this.formControls['password'].setValidators([Validators.required]);
 		this.formControls['password'].updateValueAndValidity();
+		this.form.patchValue({
+			password: 'p@ssw0rd'
+		});
 	}
 
 	onLoadData(): LoginCommand {
@@ -77,9 +80,11 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 			command = this.mapControlsToModel<LoginCommand>();
 		}
 
+		command.rememberMe = false;
+
 		console.log(command);
 
-		const response = await lastValueFrom(this.authService.login(command));
+		const response = await lastValueFrom(this.authService.loginLegacy(command));
 
 		this.isWaiting = false;
 
@@ -87,7 +92,15 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 			const tempStore: Store = { storeName: command.name, emailAddress: command.email, storeImage: '' };
 			this.loginStorageService.addToRecentlyLoggedIn(tempStore);
 
-			this.authService.handleAuthentication(response.name, response.email, response.token);
+			this.authService.handleAuthenticationLegacy(
+				command.name,
+				command.email,
+				response.access_token,
+				response.refresh_token,
+				response.expires_in
+			);
+
+			await lastValueFrom(this.authService.getLoginInfoLegacy());
 			this.router.navigate(['/home']);
 		}
 	}
@@ -131,7 +144,7 @@ export class LoginComponent extends FormBaseComponent<LoginCommand> implements O
 			email.setValidators([Validators.required, Validators.email]);
 			email.updateValueAndValidity();
 		}
-
-		this.form.reset();
+		//TODO: Uncomment Next line for testing (default password)
+		//	this.form.reset();
 	}
 }

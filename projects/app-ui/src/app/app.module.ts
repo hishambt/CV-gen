@@ -4,17 +4,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ApiModule } from 'projects/app-api/src/api.module';
 import { BASE_PATH } from 'projects/app-api/src/variables';
-import { HttpBackend, HttpClientModule } from '@angular/common/http';
+import { HttpBackend, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './core/services/auth.service';
 import { ShellModule } from './shell/shell.module';
-
-// export function createTranslateLoader(http: HttpClient) {
-// 	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-// }
+import { ServerHttpInterceptor } from './core/interceptors/server-http.interceptor';
 
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 	return new MultiTranslateHttpLoader(_httpBackend, [
@@ -55,7 +52,12 @@ export function initAppAuthenticationService(authService: AuthService) {
 		},
 		{
 			provide: BASE_PATH,
-			useValue: `/assets/mock`
+			useValue: `https://administration-api.pilot.ecomz.local/api`
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ServerHttpInterceptor,
+			multi: true
 		}
 	],
 	bootstrap: [AppComponent]
