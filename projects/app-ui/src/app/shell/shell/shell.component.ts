@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { CustomerFormComponent } from '../../features/customers/customer-form/customer-form.component';
 import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
 import { ComponentItem } from '../../shared/models/componentItem';
+import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
 import { ShellDrawerSharingService } from '../../shared/services/shell-drawer-sharging.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class ShellComponent implements OnInit, OnDestroy {
 	mobileQuery: MediaQueryList;
 	openCreateCustomerDrawerSubscription!: Subscription;
 	componentRef!: ComponentRef<any>;
-	drawerComponent: any[] = [];
+	drawerComponents: any[] = [];
 
 	private _mobileQueryListener: () => void;
 
@@ -28,8 +29,8 @@ export class ShellComponent implements OnInit, OnDestroy {
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);
 
-		this.shellDrawerSharingService.drawerCompoents$.subscribe((res) => {
-			this.drawerComponent = res;
+		this.shellDrawerSharingService.drawerCompoents$.subscribe((res: DrawerComponentItem[]) => {
+			this.drawerComponents = res;
 		});
 	}
 

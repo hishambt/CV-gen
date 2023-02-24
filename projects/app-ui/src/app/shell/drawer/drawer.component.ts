@@ -1,11 +1,10 @@
-import { HostListener, OnInit, Input, ComponentRef, ViewChild, Component } from '@angular/core';
+import { OnInit, Input, ComponentRef, ViewChild, Component } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 
-import { CustomerFormComponent } from '../../features/customers/customer-form/customer-form.component';
 import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
 import { ComponentItem } from '../../shared/models/componentItem';
+import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
 import { ShellDrawerSharingService } from '../../shared/services/shell-drawer-sharging.service';
-import { DrawerEmptyComponent } from './drawer-empty.component';
 
 @Component({
 	selector: 'app-drawer',
@@ -16,70 +15,63 @@ export class DrawerComponent implements OnInit {
 	@ViewChild(DrawerHostDirective) appDrawerHost!: DrawerHostDirective;
 	@ViewChild('drawerEnd') drawer!: MatDrawer;
 	@Input() index = 0;
-	@Input() componentName = '';
-
-	componentRef!: ComponentRef<any>;
-	drawerComponents: any[] = [];
+	// @Input() component = '';
+	@Input() component!: DrawerComponentItem;
+	private componentRef!: ComponentRef<any>;
+	drawerComponents: DrawerComponentItem[] = [];
 	targetComponent: any;
 
 	constructor(private shellDrawerSharingService: ShellDrawerSharingService) {}
 
 	ngOnInit(): void {
-		this.shellDrawerSharingService.drawerCompoents$.subscribe((res: any[]) => {
-			if (res) {
-				this.drawerComponents = res;
+		console.log('test');
+		// this.shellDrawerSharingService.drawerCompoents$.subscribe((res: DrawerComponentItem[]) => {
+		// 	if (res) {
+		// 		this.drawerComponents = res;
 
-				if (!this.componentRef) {
-					setTimeout(() => {
-						this.createDrawerComponent(res);
-					}, 100);
-				}
-			}
+		// 		if (!this.componentRef) {
+		// 			setTimeout(() => {
+		// 				this.createDrawerComponent(res[this.index]);
+		// 			}, 100);
+		// 		}
+		// 	}
+		// });
+		this.createDrawerComponent(this.component);
+	}
+
+	private createDrawerComponent(res: DrawerComponentItem) {
+		this.targetComponent = res.component;
+		this.targetComponent.then((m: any) => {
+			const comp = new ComponentItem(m);
+			const viewContainerRef = this.appDrawerHost.viewContainerRef;
+			this.componentRef = viewContainerRef.createComponent<any>(comp.component);
+			this.componentRef.instance.isDrawerMode = true;
+			this.componentRef.instance.formMode = res.formMode;
+			this.componentRef.instance.formData = res.data;
+			this.componentRef.instance.index = res.index;
+			this.componentRef.instance.closeDrawer.subscribe((res: any) => {
+				this.shellDrawerSharingService.closeComponent();
+				this.appDrawerHost.viewContainerRef.clear();
+				this.toggleDrawer();
+			});
 		});
-	}
-
-	private createDrawerComponent(res: any) {
-		this.targetComponent = this.getComponent(res[this.index].name);
-
-		const comp = new ComponentItem(this.targetComponent);
-		const viewContainerRef = this.appDrawerHost.viewContainerRef;
-
-		this.componentRef = viewContainerRef.createComponent<CustomerFormComponent>(comp.component);
-		this.componentRef.instance.isDrawerMode = true;
-		this.componentRef.instance.formMode = 'add';
-		// componentRef.instance.data = adItem.data;
-	}
-
-	getComponent(name: string): any {
-		let target;
-		switch (name) {
-			case 'CustomerFormComponent':
-				target = CustomerFormComponent;
-				break;
-
-			default:
-				target = DrawerEmptyComponent;
-				break;
-		}
-
-		return target;
 	}
 
 	toggleDrawer() {
 		this.drawer.opened = !this.drawer.opened;
 	}
 
-	@HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
-		// this.onSubmit();
-	}
+	// @HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
+	// 	// this.onSubmit();
+	// }
 
-	@HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
-		if (this.drawer.opened) {
-			if (this.drawerComponents.length - 1 == this.index) {
-				this.shellDrawerSharingService.closeComponent();
-				this.appDrawerHost.viewContainerRef.clear();
-				this.toggleDrawer();
-			}
-		}
-	}
+	// @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
+	// 	if (this.drawer.opened) {
+	// 		if (this.drawerComponents.length - 1 == this.index) {
+	// 			this.shellDrawerSharingService.closeComponent();
+	// 			this.appDrawerHost.viewContainerRef.clear();
+	// 			this.toggleDrawer();
+	// 		}
+	// 	}
+	// }
 }

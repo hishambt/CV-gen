@@ -23,8 +23,8 @@
 			<template appDrawerHost> </template>
 		</mat-drawer>
 
-		<ng-container *ngFor="let component of drawerComponent; let i = index">
-			<app-drawer [index]="component.index" [componentName]="component.name"></app-drawer>
+		<ng-container *ngFor="let item of drawerComponents; let i = index">
+			<app-drawer [component]="item"></app-drawer>
 		</ng-container>
 	</mat-sidenav-content>
 	<ng-template #dialogActions>

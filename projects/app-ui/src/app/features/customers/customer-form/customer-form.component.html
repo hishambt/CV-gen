@@ -1,5 +1,5 @@
 <div class="container-fluid">
-	<app-breadcrumb></app-breadcrumb>
+	<app-breadcrumb *ngIf="!isDrawerMode"></app-breadcrumb>
 	<div class="row">
 		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<mat-card>

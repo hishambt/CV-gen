@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Customer } from 'projects/app-api/src/model/customer';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
@@ -16,8 +15,6 @@ import { SharedModule } from '../../../shared/shared.module';
 	imports: [SharedModule]
 })
 export class CustomerFormComponent extends DrawerBaseComponent<any> implements OnInit {
-	@Input() customer!: Customer;
-
 	onLoadData() {
 		return {
 			firstName: '',
@@ -37,7 +34,7 @@ export class CustomerFormComponent extends DrawerBaseComponent<any> implements O
 
 	override ngOnInit(): void {
 		super.ngOnInit();
-		this.form.controls['firstName'].patchValue(this.customer ? this.customer['firstName'] : null);
+		this.form.controls['firstName'].patchValue(this.formData ? this.formData['firstName'] : null);
 	}
 
 	async submitRecord(_actionName: string): Promise<void> {
@@ -77,4 +74,18 @@ export class CustomerFormComponent extends DrawerBaseComponent<any> implements O
 				break;
 		}
 	}
+
+	// @HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
+	// 	// this.onSubmit();
+	// }
+
+	// @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
+	// 	if (this.drawer.opened) {
+	// 		if (this.drawerComponents.length - 1 == this.index) {
+	// 			this.shellDrawerSharingService.closeComponent();
+	// 			this.appDrawerHost.viewContainerRef.clear();
+	// 			this.toggleDrawer();
+	// 		}
+	// 	}
+	// }
 }

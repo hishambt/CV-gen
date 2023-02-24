@@ -12,6 +12,7 @@ import { FormBaseComponent } from './form-base.component';
 })
 export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData> implements OnInit, OnDestroy {
 	@Input() index!: number;
+	@Input() override formData!: TData;
 	@Output() closeDrawer = new EventEmitter();
 	isDrawerMode = false;
 	isComponentHidden = false;

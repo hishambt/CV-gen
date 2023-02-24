@@ -19,6 +19,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	data!: TData;
 	form: FormGroup;
 	formMode: 'edit' | 'add' = 'add';
+	formData!: TData;
 
 	/**
 	 * @description Set form object to build the FormControl

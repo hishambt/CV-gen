@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Customer } from 'projects/app-api/src/model/customer';
 import { BehaviorSubject, Subject } from 'rxjs';
 
+import { DrawerComponentItem } from '../models/drawerComponentItem';
+
 export interface DrawerDetails {
 	controlName?: string;
 	rowIndex?: string;
@@ -23,17 +25,29 @@ export class ShellDrawerSharingService {
 
 	private targetComponentDetails: DrawerDetails = {};
 
-	private drawerCompoents = new BehaviorSubject<{ name: string; index: number }[]>([]);
+	private drawerCompoents = new BehaviorSubject<DrawerComponentItem[]>([]);
 	drawerCompoents$ = this.drawerCompoents.asObservable();
 
-	private activeComponents: { name: string; index: number }[] = [];
+	private activeComponents: DrawerComponentItem[] = [];
 
 	openCreateCustomerForm(customer: Customer): void {
 		this.openCreateCustomerDrawer.next(customer);
 	}
 
-	openComponentInDrawer(componentName: string) {
-		this.activeComponents.push({ name: componentName, index: this.activeComponents.length });
+	/**
+	 * Send and Open component in drawer
+	 * @param componentName component reference
+	 * @param data any
+	 * @param formMode 'edit' | 'add'
+	 */
+	openComponentInDrawer(componentName: any, data: any, formMode: 'edit' | 'add') {
+		const activeComponent: DrawerComponentItem = {
+			component: componentName,
+			index: this.activeComponents.length,
+			data: data,
+			formMode: formMode
+		};
+		this.activeComponents.push(activeComponent);
 		this.drawerCompoents.next(this.activeComponents);
 	}
 
@@ -44,10 +58,9 @@ export class ShellDrawerSharingService {
 	closeComponent(data?: any): void {
 		console.log('called');
 		this.onCloseComponentInDrawer.next(data);
-
 		this.activeComponents.pop();
 		setTimeout(() => {
 			this.drawerCompoents.next(this.activeComponents);
-		}, 100);
+		}, 50);
 	}
 }
