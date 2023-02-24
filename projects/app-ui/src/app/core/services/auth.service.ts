@@ -62,7 +62,7 @@ export class AuthService implements OnDestroy {
 			this.user.next(loadedUser);
 			this.isAuthenticated.next(true);
 			const expirationDuration = new Date(userData.expirationDate).getTime() - new Date().getTime();
-			this.autoLogout(expirationDuration);
+			//this.autoLogout(expirationDuration);
 		} else {
 			this.logout();
 		}
