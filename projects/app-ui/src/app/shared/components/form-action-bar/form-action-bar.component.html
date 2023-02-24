@@ -1,5 +1,5 @@
-<div class="d-grid gap-2 d-md-flex justify-content-between">
-	<div class="start-actions">
+<div class="d-md-flex" [ngClass]="{ 'justify-content-between': startButtons.length && endButtons.length }">
+	<div class="start-actions" *ngIf="startButtons.length" [ngClass]="{ 'flex-fill': startButtons.length === 1 }">
 		<ng-container *ngFor="let action of startButtons!; let isLast = last">
 			<button
 				*ngIf="action?.visible"
@@ -32,7 +32,7 @@
 			</mat-menu>
 		</ng-container>
 	</div>
-	<div class="end-actions">
+	<div class="end-actions" *ngIf="endButtons.length">
 		<ng-container *ngFor="let action of endButtons!; let isLast = last">
 			<button
 				*ngIf="action?.visible"
