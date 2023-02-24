@@ -6,12 +6,14 @@ import { ApiModule } from 'projects/app-api/src/api.module';
 import { BASE_PATH } from 'projects/app-api/src/variables';
 import { HttpBackend, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './core/services/auth.service';
 import { ShellModule } from './shell/shell.module';
 import { ServerHttpInterceptor } from './core/interceptors/server-http.interceptor';
+import { environment } from '../environments/environment';
 
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 	return new MultiTranslateHttpLoader(_httpBackend, [
@@ -41,7 +43,13 @@ export function initAppAuthenticationService(authService: AuthService) {
 		AppRoutingModule,
 		ApiModule,
 		HttpClientModule,
-		ShellModule
+		ShellModule,
+		ServiceWorkerModule.register('ngsw-worker.js', {
+			enabled: environment.production,
+			// Register the ServiceWorker as soon as the application is stable
+			// or after 30 seconds (whichever comes first).
+			registrationStrategy: 'registerWhenStable:30000'
+		})
 	],
 	providers: [
 		{
