@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CanDeactivateGuard } from '../../core/guards/can-deactivate.guard';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { OrdersListComponent } from './orders-list/orders-list.component';
@@ -13,11 +14,13 @@ const routes: Routes = [
 	{
 		path: 'add',
 		component: OrderFormComponent,
+		canDeactivate: [CanDeactivateGuard],
 		data: { mode: 'add' }
 	},
 	{
 		path: 'edit',
 		component: OrderFormComponent,
+		canDeactivate: [CanDeactivateGuard],
 		data: { mode: 'edit' }
 	},
 	{

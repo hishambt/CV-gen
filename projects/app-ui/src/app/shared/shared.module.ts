@@ -12,6 +12,7 @@ import { AvatarComponent } from './components/avatar/avatar.component';
 import { CustomersDropdownComponent } from './components/form-fields/customers-dropdown/customers-dropdown.component';
 import { FormActionBarComponent } from './components/form-action-bar/form-action-bar.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivate-dialog/can-deactivate-dialog.component';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 		AvatarComponent,
 		FormActionBarComponent,
 		BreadcrumbComponent,
+		CanDeactivateDialogComponent,
 		// shared dropdowns
 		CustomersDropdownComponent
 	],
