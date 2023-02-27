@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../core/services/auth.service';
 import { ErrorService } from '../services/error.service';
-import { ShellDrawerSharingService } from '../services/shell-drawer-sharging.service';
+import { AppFormSharingService } from '../services/app-form-sharging.service';
 import { FormBaseComponent } from './form-base.component';
 
 @Component({
@@ -20,7 +20,7 @@ export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData
 	sendTotalNumberOfComponentsSubscription!: Subscription;
 
 	constructor(
-		@SkipSelf() private shellDrawerSharingService: ShellDrawerSharingService,
+		@SkipSelf() private appFormSharingService: AppFormSharingService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
@@ -31,19 +31,6 @@ export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData
 
 	override ngOnInit(): void {
 		super.ngOnInit();
-		this.sendTotalNumberOfComponentsSubscription = this.shellDrawerSharingService?.sendTotalNumberOfComponents$.subscribe(
-			(totalNumberOfComponents) => {
-				this.totalNumberOfComponents = totalNumberOfComponents;
-
-				if (this.index !== this.totalNumberOfComponents) {
-					setTimeout(() => {
-						this.isComponentHidden = true;
-					}, 350);
-				} else {
-					this.isComponentHidden = false;
-				}
-			}
-		);
 	}
 
 	override ngOnDestroy(): void {

@@ -2,7 +2,7 @@
 	<app-breadcrumb *ngIf="!isDrawerMode"></app-breadcrumb>
 	<div class="row">
 		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
-			<mat-card>
+			<mat-card [ngClass]="{ 'mat-elevation-z0': isDrawerMode, 'px-0': isDrawerMode }">
 				<h1>Create Customer</h1>
 				isDrawerMode:{{ isDrawerMode }} <br />
 				formMode:{{ formMode }} <br />
@@ -43,7 +43,7 @@
 					},
 					{ visible: true, disabled: false, class: 'mat-stroked-button', color: 'accent', text: 'Cancel' }
 				]"
-				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				[endButtons]="[{ visible: !isDrawerMode, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
 				(buttonClick)="onActionClick($event)"
 			></app-form-action-bar>
 		</div>

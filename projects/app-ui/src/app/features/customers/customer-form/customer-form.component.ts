@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
 import { ErrorService } from '../../../shared/services/error.service';
-import { ShellDrawerSharingService } from '../../../shared/services/shell-drawer-sharging.service';
+import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
@@ -23,13 +23,13 @@ export class CustomerFormComponent extends DrawerBaseComponent<any> implements O
 	}
 
 	constructor(
-		shellDrawerSharingService: ShellDrawerSharingService,
+		appFormSharingService: AppFormSharingService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(shellDrawerSharingService, errorService, authService, router, route);
+		super(appFormSharingService, errorService, authService, router, route);
 	}
 
 	override ngOnInit(): void {
@@ -82,7 +82,7 @@ export class CustomerFormComponent extends DrawerBaseComponent<any> implements O
 	// @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
 	// 	if (this.drawer.opened) {
 	// 		if (this.drawerComponents.length - 1 == this.index) {
-	// 			this.shellDrawerSharingService.closeComponent();
+	// 			this.appFormSharingService.closeComponent();
 	// 			this.appDrawerHost.viewContainerRef.clear();
 	// 			this.toggleDrawer();
 	// 		}

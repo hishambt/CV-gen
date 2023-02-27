@@ -1,13 +1,13 @@
 <div class="container-fluid">
-	<app-breadcrumb></app-breadcrumb>
+	<app-breadcrumb *ngIf="!isDrawerMode"></app-breadcrumb>
 	<div class="row">
-		<div class="col-9">
-			<mat-card>
+		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
+			<mat-card [ngClass]="{ 'mat-elevation-z0': isDrawerMode, 'px-0': isDrawerMode }">
 				<div class="d-flex justify-content-between">
 					<h1>Create Order</h1>
 					<mat-chip-list aria-label="Fish selection">
 						<mat-chip>Draft</mat-chip>
-						<mat-chip>Created: 21-02-2023 . 12:52 PM</mat-chip>
+						<mat-chip>21-02-2023 . 12:52 PM</mat-chip>
 					</mat-chip-list>
 				</div>
 				<mat-divider></mat-divider>
@@ -55,12 +55,12 @@
 				</form>
 			</mat-card>
 		</div>
-		<div class="col-3">
+		<div class="col-3" *ngIf="!isDrawerMode">
 			<mat-card *ngIf="false"></mat-card>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-9">
+		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<app-form-action-bar
 				[startButtons]="[
 					{
@@ -73,7 +73,7 @@
 					},
 					{ visible: true, disabled: false, class: '', color: 'accent', text: 'Cancel' }
 				]"
-				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				[endButtons]="[{ visible: !isDrawerMode, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
 				(buttonClick)="onActionClick($event)"
 			></app-form-action-bar>
 		</div>

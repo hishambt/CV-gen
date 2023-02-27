@@ -8,9 +8,10 @@ import { FooterComponent } from './footer/footer.component';
 import { DrawerHostDirective } from '../shared/directives/drawer-host.directive';
 import { DrawerComponent } from './drawer/drawer.component';
 import { DrawerEmptyComponent } from './drawer/drawer-empty.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
-	declarations: [ShellComponent, SideNavbarComponent, HeaderComponent, FooterComponent, DrawerComponent, DrawerEmptyComponent],
+	declarations: [ShellComponent, SideNavbarComponent, HeaderComponent, FooterComponent, DrawerComponent, DrawerEmptyComponent, DialogComponent],
 	imports: [SharedModule, DrawerHostDirective]
 })
 export class ShellModule {}

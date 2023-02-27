@@ -4,7 +4,7 @@ import { MatSelect } from '@angular/material/select';
 import { Customer } from 'projects/app-api/src/model/customer';
 import { ReplaySubject, Subject, take, takeUntil } from 'rxjs';
 
-import { ShellDrawerSharingService } from '../../../services/shell-drawer-sharging.service';
+import { AppFormSharingService } from '../../../services/app-form-sharging.service';
 
 @Component({
 	selector: 'app-customers-dropdown',
@@ -28,7 +28,7 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 	public filteredBanks: ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
 	protected _onDestroy = new Subject<void>();
 
-	constructor(private shellDrawerSharingService: ShellDrawerSharingService) {}
+	constructor(private appFormSharingService: AppFormSharingService) {}
 	public options = [
 		{ name: 'Customer 1', id: '00001' },
 		{ name: 'Customer 2', id: '00002' },
@@ -45,7 +45,7 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 		});
 
 		//TODO: missing un subscribe
-		this.shellDrawerSharingService.onCloseComponentInDrawer$.subscribe((data: any) => {
+		this.appFormSharingService.onCloseComponentInDrawer$.subscribe((data: any) => {
 			if (data) {
 				this.options.unshift({ name: data.firstName, id: '00006' });
 				this.filteredBanks.next(this.options.slice());
@@ -64,12 +64,25 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 			firstName: this.bankFilterCtrl.value ?? '',
 			lastName: 'test'
 		};
-		// this.shellDrawerSharingService.openCreateCustomerForm(customer);
 		const component = import('projects/app-ui/src/app/features/customers/customer-form/customer-form.component').then(
 			(m) => m.CustomerFormComponent
 		);
 
-		this.shellDrawerSharingService.openComponentInDrawer(component, customer, 'add');
+		this.appFormSharingService.openComponentInDrawer(component, customer, 'add');
+	}
+
+	//TODO: move dialog call to a shared component
+	onCreateNew1() {
+		const customer: Customer = {
+			firstName: this.bankFilterCtrl.value ?? '',
+			lastName: 'test'
+		};
+		// const component = import('projects/app-ui/src/app/features/customers/customer-form/customer-form.component').then(
+		// 	(m) => m.CustomerFormComponent
+		// );
+		const component = import('projects/app-ui/src/app/features/orders/order-form/order-form.component').then((m) => m.OrderFormComponent);
+
+		this.appFormSharingService.openComponentInDialog(component, customer, 'add');
 	}
 
 	onSelectionChange(event: any) {

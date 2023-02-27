@@ -4,7 +4,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
 import { ComponentItem } from '../../shared/models/componentItem';
 import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
-import { ShellDrawerSharingService } from '../../shared/services/shell-drawer-sharging.service';
+import { AppFormSharingService } from '../../shared/services/app-form-sharging.service';
 
 @Component({
 	selector: 'app-drawer',
@@ -21,21 +21,9 @@ export class DrawerComponent implements OnInit {
 	drawerComponents: DrawerComponentItem[] = [];
 	targetComponent: any;
 
-	constructor(private shellDrawerSharingService: ShellDrawerSharingService) {}
+	constructor(private appFormSharingService: AppFormSharingService) {}
 
 	ngOnInit(): void {
-		console.log('test');
-		// this.shellDrawerSharingService.drawerCompoents$.subscribe((res: DrawerComponentItem[]) => {
-		// 	if (res) {
-		// 		this.drawerComponents = res;
-
-		// 		if (!this.componentRef) {
-		// 			setTimeout(() => {
-		// 				this.createDrawerComponent(res[this.index]);
-		// 			}, 100);
-		// 		}
-		// 	}
-		// });
 		this.createDrawerComponent(this.component);
 	}
 
@@ -50,7 +38,7 @@ export class DrawerComponent implements OnInit {
 			this.componentRef.instance.formData = res.data;
 			this.componentRef.instance.index = res.index;
 			this.componentRef.instance.closeDrawer.subscribe((res: any) => {
-				this.shellDrawerSharingService.closeComponent();
+				this.appFormSharingService.closeComponent();
 				this.appDrawerHost.viewContainerRef.clear();
 				this.toggleDrawer();
 			});
@@ -60,18 +48,4 @@ export class DrawerComponent implements OnInit {
 	toggleDrawer() {
 		this.drawer.opened = !this.drawer.opened;
 	}
-
-	// @HostListener('document:keydown.enter', ['$event']) onEnterHandler(): void {
-	// 	// this.onSubmit();
-	// }
-
-	// @HostListener('document:keydown.escape', ['$event']) onEscapeHandler(): void {
-	// 	if (this.drawer.opened) {
-	// 		if (this.drawerComponents.length - 1 == this.index) {
-	// 			this.shellDrawerSharingService.closeComponent();
-	// 			this.appDrawerHost.viewContainerRef.clear();
-	// 			this.toggleDrawer();
-	// 		}
-	// 	}
-	// }
 }

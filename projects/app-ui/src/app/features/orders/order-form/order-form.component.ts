@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { FormBaseComponent } from '../../../shared/bases/form-base.component';
+import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
 import { ErrorService } from '../../../shared/services/error.service';
-import { ShellDrawerSharingService } from '../../../shared/services/shell-drawer-sharging.service';
+import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 
 @Component({
 	selector: 'app-order-form',
 	templateUrl: './order-form.component.html',
 	styleUrls: ['./order-form.component.scss']
 })
-export class OrderFormComponent extends FormBaseComponent<any> implements OnInit {
+export class OrderFormComponent extends DrawerBaseComponent<any> implements OnInit {
 	foods: any[] = [
 		{ value: 'steak-0', viewValue: 'Steak' },
 		{ value: 'pizza-1', viewValue: 'Pizza' },
@@ -19,13 +19,13 @@ export class OrderFormComponent extends FormBaseComponent<any> implements OnInit
 	];
 
 	constructor(
-		private shellDrawerSharingService: ShellDrawerSharingService,
+		appFormSharingService: AppFormSharingService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(errorService, authService, router, route);
+		super(appFormSharingService, errorService, authService, router, route);
 	}
 
 	override ngOnInit(): void {
