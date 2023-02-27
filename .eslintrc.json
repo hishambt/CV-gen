@@ -1,7 +1,7 @@
 {
 	"root": true,
 	"plugins": ["import", "unused-imports", "deprecation"],
-	"ignorePatterns": ["projects/**/*"],
+	"ignorePatterns": ["projects/**/*", "*.worker.ts"],
 	"overrides": [
 		{
 			"files": ["*.ts"],

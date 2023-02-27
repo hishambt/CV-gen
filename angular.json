@@ -28,7 +28,8 @@
 						"styles": ["projects/app-ui/src/styles.scss"],
 						"scripts": [],
 						"serviceWorker": true,
-						"ngswConfigPath": "projects/app-ui/ngsw-config.json"
+						"ngswConfigPath": "projects/app-ui/ngsw-config.json",
+						"webWorkerTsConfig": "projects/app-ui/tsconfig.worker.json"
 					},
 					"configurations": {
 						"production": {
@@ -58,7 +59,8 @@
 							"vendorChunk": true,
 							"extractLicenses": false,
 							"sourceMap": true,
-							"namedChunks": true
+							"outputHashing": "all",
+							"namedChunks": false
 						}
 					},
 					"defaultConfiguration": "production"
@@ -91,7 +93,8 @@
 						"inlineStyleLanguage": "scss",
 						"assets": ["projects/app-ui/src/favicon.ico", "projects/app-ui/src/assets", "projects/app-ui/src/manifest.webmanifest"],
 						"styles": ["projects/app-ui/src/styles.scss"],
-						"scripts": []
+						"scripts": [],
+						"webWorkerTsConfig": "projects/app-ui/tsconfig.worker.json"
 					}
 				},
 				"lint": {
