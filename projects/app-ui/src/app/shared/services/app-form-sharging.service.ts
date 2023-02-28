@@ -67,7 +67,7 @@ export class AppFormSharingService {
 	}
 
 	//#endregion Dialog
-	openComponentInDialog(component: any, data: any, formMode: 'edit' | 'add') {
+	openComponentInDialog(component: any, formMode: 'edit' | 'add', data?: any) {
 		const activeComponent: DrawerComponentItem = {
 			component: component,
 			index: this.activeDialogComponents.length,

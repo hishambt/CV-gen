@@ -82,7 +82,7 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 		// );
 		const component = import('projects/app-ui/src/app/features/orders/order-form/order-form.component').then((m) => m.OrderFormComponent);
 
-		this.appFormSharingService.openComponentInDialog(component, customer, 'add');
+		this.appFormSharingService.openComponentInDialog(component, 'add', customer);
 	}
 
 	onSelectionChange(event: any) {

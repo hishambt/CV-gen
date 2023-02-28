@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 
 import * as packageInfo from '../../../../package.json';
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
 	private _packageInfo = (packageInfo as any).default;
 	version = this._packageInfo.version;
 	online!: boolean;
-	constructor(translate: TranslateService, private appUpdateService: AppUpdateService, private swUpdate: SwUpdate) {
+	constructor(translate: TranslateService, private appUpdateService: AppUpdateService) {
 		console.log('Version: ' + this.version);
 		// this language will be used as a fallback when a translation isn't found in the current language
 		translate.addLangs(['en', 'ar']);
@@ -25,7 +24,7 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('test 3');
+		console.log('test 6');
 		this.appUpdateService.checkForUpdates();
 		this.connectionCheck();
 	}

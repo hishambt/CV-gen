@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { catchError, concatMap, filter, finalize, take } from 'rxjs/operators';
 import { environment } from 'projects/app-ui/src/environments/environment';
@@ -21,7 +21,7 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		return next.handle(this.addToken(req)).pipe(
-			catchError((err) => {
+			catchError((err: HttpErrorResponse) => {
 				if (err.status === 401) {
 					return this.handle401Error(req, next);
 				}
