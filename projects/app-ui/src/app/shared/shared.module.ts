@@ -13,6 +13,7 @@ import { CustomersDropdownComponent } from './components/form-fields/customers-d
 import { FormActionBarComponent } from './components/form-action-bar/form-action-bar.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivate-dialog/can-deactivate-dialog.component';
+import { AppLoadingBarComponent } from './components/app-loading-bar/app-loading-bar.component';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivat
 		AvatarComponent,
 		FormActionBarComponent,
 		BreadcrumbComponent,
+		AppLoadingBarComponent,
 		CanDeactivateDialogComponent,
 		// shared dropdowns
 		CustomersDropdownComponent
@@ -47,6 +49,7 @@ import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivat
 		AvatarComponent,
 		FormActionBarComponent,
 		BreadcrumbComponent,
+		AppLoadingBarComponent,
 		// shared exported Pipes
 		SafePipe,
 		// shared exported dropdowns

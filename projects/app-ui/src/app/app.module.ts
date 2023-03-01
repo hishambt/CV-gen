@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AuthService } from './core/services/auth.service';
 import { ShellModule } from './shell/shell.module';
 import { ServerHttpInterceptor } from './core/interceptors/server-http.interceptor';
+import { LoadingHttpInterceptorService } from './core/interceptors/loading-http.interceptor';
 
 export function HttpLoaderFactory(_httpBackend: HttpBackend) {
 	return new MultiTranslateHttpLoader(_httpBackend, [
@@ -65,6 +66,11 @@ export function initAppAuthenticationService(authService: AuthService) {
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ServerHttpInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: LoadingHttpInterceptorService,
 			multi: true
 		}
 	],

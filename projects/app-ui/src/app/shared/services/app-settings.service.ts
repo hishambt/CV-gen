@@ -12,6 +12,9 @@ export class AppSettingsService {
 	private isDrawerOpened = new BehaviorSubject<boolean>(false);
 	isDrawerOpened$ = this.isDrawerOpened.asObservable();
 
+	private isAppLoading = new BehaviorSubject<boolean>(false);
+	isAppLoading$ = this.isAppLoading.asObservable();
+
 	constructor() {}
 
 	/**
@@ -33,5 +36,9 @@ export class AppSettingsService {
 			});
 
 		return routeElements;
+	}
+
+	toggleIsLoading(isLoading: boolean) {
+		this.isAppLoading.next(isLoading);
 	}
 }
