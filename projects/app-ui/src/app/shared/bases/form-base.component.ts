@@ -26,7 +26,6 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	 */
 	abstract onLoadData(): TData;
 	abstract submitRecord(status?: string): Promise<void>;
-
 	constructor(errorService: ErrorService, authService: AuthService, protected router: Router, protected route: ActivatedRoute) {
 		super(errorService, authService);
 

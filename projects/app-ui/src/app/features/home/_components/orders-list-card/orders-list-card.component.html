@@ -1,0 +1,28 @@
+<mat-card>
+	<h2>Latest orders</h2>
+	<mat-divider></mat-divider>
+	<ul class="list-group list-group-flush mb-3">
+		<li *ngFor="let order of data" class="list-group-item d-flex justify-content-between align-items-center">
+			<div class="start-ctx">
+				<div class="fw-bold">
+					<mat-chip-list aria-label="Status selection">
+						{{ order?.InvoiceNumber }}
+						<mat-chip>{{ order?.StatusDescription }}</mat-chip>
+					</mat-chip-list>
+				</div>
+				{{ order.CreatedDate | date : 'dd-MM-yyyy hh:mm a' }}
+			</div>
+			<div class="end-ctx">
+				{{ order.GrandTotal }}
+				<img
+					class="flags"
+					[title]="order.CountryName"
+					height="17"
+					width="23"
+					src="//administration.pr.ecomz.co/en/img/miscelleneaous/flags/{{ order?.CountryISOCode?.toLowerCase() }}.png"
+					alt=""
+				/>
+			</div>
+		</li>
+	</ul>
+</mat-card>
