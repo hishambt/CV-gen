@@ -6,6 +6,7 @@ export interface ActionButton {
 	class: string;
 	color: ThemePalette;
 	text: string;
+	isWaiting?: boolean;
 	options?: Array<{
 		text: string;
 	}>;

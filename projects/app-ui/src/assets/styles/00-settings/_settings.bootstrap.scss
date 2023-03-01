@@ -109,6 +109,54 @@ $utilities: map-merge(
         //             ),
         //         )
         //     ),
+        "start":
+            map-merge(
+                map-get($utilities, "start"),
+                (
+                    property: inset-inline-start,
+                    class: start,
+                    values:
+                        map-merge(
+                            map-get(map-get($utilities, "start"), "values"),
+                            (
+                                1: 1px,
+                                2: 2px,
+                                3: 3px,
+                                4: 4px,
+                                5: 5px,
+                                6: 6px,
+                                7: 7px,
+                                8: 8px,
+                                9: 9px,
+                                10: 10px,
+                            )
+                        ),
+                )
+            ),
+        "end":
+            map-merge(
+                map-get($utilities, "end"),
+                (
+                    property: inset-inline-end,
+                    class: end,
+                    values:
+                        map-merge(
+                            map-get(map-get($utilities, "end"), "values"),
+                            (
+                                1: 1px,
+                                2: 2px,
+                                3: 3px,
+                                4: 4px,
+                                5: 5px,
+                                6: 6px,
+                                7: 7px,
+                                8: 8px,
+                                9: 9px,
+                                10: 10px,
+                            )
+                        ),
+                )
+            ),
         "width":
             map-merge(
                 map-get($utilities, "width"),
