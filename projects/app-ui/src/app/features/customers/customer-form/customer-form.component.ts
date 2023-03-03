@@ -6,14 +6,13 @@ import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component
 import { ErrorService } from '../../../shared/services/error.service';
 import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 import { SharedModule } from '../../../shared/shared.module';
-import { CustomerCardComponent } from '../_components/customer-card/customer-card.component';
 
 @Component({
 	standalone: true,
 	selector: 'app-customer-form',
 	templateUrl: './customer-form.component.html',
 	styleUrls: ['./customer-form.component.scss'],
-	imports: [SharedModule, CustomerCardComponent]
+	imports: [SharedModule]
 })
 export class CustomerFormComponent extends DrawerBaseComponent<any> implements OnInit {
 	onLoadData() {

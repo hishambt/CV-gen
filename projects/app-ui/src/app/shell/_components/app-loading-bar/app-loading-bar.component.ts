@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppSettingsService } from '../../services/app-settings.service';
+import { AppSettingsService } from '../../../shared/services/app-settings.service';
 
 @Component({
 	selector: 'app-loading-bar',

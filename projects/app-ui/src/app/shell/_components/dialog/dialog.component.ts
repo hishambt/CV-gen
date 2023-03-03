@@ -2,7 +2,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { Component, ComponentRef, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { ComponentItem } from '../../shared/models/componentItem';
+import { ComponentItem } from '../../../shared/models/componentItem';
 
 @Component({
 	selector: 'app-dialog',

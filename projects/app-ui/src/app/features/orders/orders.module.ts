@@ -5,11 +5,11 @@ import { OrderViewComponent } from './order-view/order-view.component';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { SharedModule } from '../../shared/shared.module';
 import { OrdersRoutingModule } from './orders-routing.module';
-import { CustomerCardComponent } from '../customers/_components/customer-card/customer-card.component';
+import { CustomerDetailsCardComponent } from './_components/customer-details-card/customer-details-card.component';
 
 @NgModule({
-	declarations: [OrdersListComponent, OrderViewComponent, OrderFormComponent],
-	imports: [SharedModule, OrdersRoutingModule, CustomerCardComponent],
+	declarations: [OrdersListComponent, OrderViewComponent, OrderFormComponent, CustomerDetailsCardComponent],
+	imports: [SharedModule, OrdersRoutingModule],
 	providers: []
 })
 export class OrdersModule {}

@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Customer } from 'projects/app-api/src/model/customer';
 import { BehaviorSubject, Subject } from 'rxjs';
 
-import { DialogComponent } from '../../shell/dialog/dialog.component';
+import { DialogComponent } from '../../shell/_components/dialog/dialog.component';
 import { DrawerComponentItem } from '../models/drawerComponentItem';
 
 export interface DrawerDetails {

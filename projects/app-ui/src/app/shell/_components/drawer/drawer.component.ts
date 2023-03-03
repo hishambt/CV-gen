@@ -1,10 +1,10 @@
 import { OnInit, Input, ComponentRef, ViewChild, Component } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 
-import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
-import { ComponentItem } from '../../shared/models/componentItem';
-import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
-import { AppFormSharingService } from '../../shared/services/app-form-sharging.service';
+import { DrawerHostDirective } from '../../../shared/directives/drawer-host.directive';
+import { ComponentItem } from '../../../shared/models/componentItem';
+import { DrawerComponentItem } from '../../../shared/models/drawerComponentItem';
+import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 
 @Component({
 	selector: 'app-drawer',
