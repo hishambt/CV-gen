@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -15,7 +16,10 @@ export class AppSettingsService {
 	private isAppLoading = new BehaviorSubject<boolean>(false);
 	isAppLoading$ = this.isAppLoading.asObservable();
 
-	constructor() {}
+	private connectionStatus = new Subject<boolean>();
+	connectionStatus$ = this.connectionStatus.asObservable();
+
+	constructor(private httpClient: HttpClient) {}
 
 	/**
 	 * Retruns redirect/current url
@@ -40,5 +44,38 @@ export class AppSettingsService {
 
 	toggleIsLoading(isLoading: boolean) {
 		this.isAppLoading.next(isLoading);
+	}
+
+	toggleConnectionStatus(isConnected: boolean) {
+		this.connectionStatus.next(isConnected);
+
+		if (!isConnected) {
+			this.initWebWorker();
+		}
+	}
+
+	initWebWorker() {
+		console.log('initWebWorker');
+
+		if (typeof Worker !== 'undefined') {
+			// Create a new
+			const worker = new Worker(new URL('./app-settings.worker', import.meta.url));
+
+			worker.addEventListener('message', ({ data }) => {
+				this.update(data);
+			});
+
+			worker.postMessage('start');
+			// Create a new
+		} else {
+			// Web Workers are not supported in this environment.
+			// You should add a fallback so that your program still executes correctly.
+		}
+	}
+
+	update(data: any) {
+		if (data == 'stop') {
+			this.toggleConnectionStatus(true);
+		}
 	}
 }

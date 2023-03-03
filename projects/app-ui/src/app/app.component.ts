@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('test 6');
+		console.log('test 14');
 		this.appUpdateService.checkForUpdates();
 		this.connectionCheck();
 	}

@@ -14,6 +14,7 @@ import { FormActionBarComponent } from './components/form-action-bar/form-action
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivate-dialog/can-deactivate-dialog.component';
 import { AppLoadingBarComponent } from './components/app-loading-bar/app-loading-bar.component';
+import { AppConnectionIssueComponent } from './components/app-connection-issue/app-connection-issue.component';
 
 @NgModule({
 	declarations: [
@@ -24,6 +25,7 @@ import { AppLoadingBarComponent } from './components/app-loading-bar/app-loading
 		FormActionBarComponent,
 		BreadcrumbComponent,
 		AppLoadingBarComponent,
+		AppConnectionIssueComponent,
 		CanDeactivateDialogComponent,
 		// shared dropdowns
 		CustomersDropdownComponent
@@ -50,6 +52,7 @@ import { AppLoadingBarComponent } from './components/app-loading-bar/app-loading
 		FormActionBarComponent,
 		BreadcrumbComponent,
 		AppLoadingBarComponent,
+		AppConnectionIssueComponent,
 		// shared exported Pipes
 		SafePipe,
 		// shared exported dropdowns

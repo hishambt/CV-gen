@@ -1,6 +1,10 @@
 {
 	"$schema": "../../node_modules/@angular/service-worker/config/schema.json",
 	"index": "/index.html",
+	"appData": {
+		"version": "0.0.2",
+		"changelog": "This update fixes a serious bug."
+	},
 	"assetGroups": [
 		{
 			"name": "app",
@@ -15,6 +19,38 @@
 			"updateMode": "prefetch",
 			"resources": {
 				"files": ["/assets/**", "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
+			}
+		}
+	],
+	"dataGroups": [
+		{
+			"name": "auth",
+			"urls": ["/api/token"],
+			"cacheConfig": {
+				"strategy": "freshness",
+				"maxSize": 100,
+				"maxAge": "0",
+				"timeout": "10s"
+			}
+		},
+
+		{
+			"name": "api-exclude",
+			"urls": ["/api/account/authorizedping"],
+			"cacheConfig": {
+				"strategy": "performance",
+				"maxSize": 100,
+				"maxAge": "0u"
+			}
+		},
+		{
+			"name": "api-performance",
+			"urls": ["/api/**"],
+			"cacheConfig": {
+				"strategy": "performance",
+				"maxSize": 100,
+				"maxAge": "10s",
+				"timeout": "10s"
 			}
 		}
 	],

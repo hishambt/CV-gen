@@ -5,13 +5,23 @@ import { catchError, concatMap, filter, finalize, take } from 'rxjs/operators';
 import { environment } from 'projects/app-ui/src/environments/environment';
 
 import { AuthService } from '../services/auth.service';
+import { AppSettingsService } from '../../shared/services/app-settings.service';
 
 @Injectable()
 export class ServerHttpInterceptor implements HttpInterceptor {
 	isRefreshingToken = false;
+	isConnectionOK = true;
 	tokenRefreshed$ = new BehaviorSubject<boolean>(false);
+	connectionRestarted$ = new BehaviorSubject<boolean>(false);
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private appSettingsService: AppSettingsService) {
+		this.appSettingsService.connectionStatus$.subscribe((res) => {
+			if (res) {
+				this.isConnectionOK = res;
+				this.connectionRestarted$.next(res);
+			}
+		});
+	}
 
 	addToken(req: HttpRequest<any>): HttpRequest<any> {
 		const token = this.authService.token;
@@ -20,14 +30,43 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		console.log(this.isConnectionOK);
+
 		return next.handle(this.addToken(req)).pipe(
 			catchError((err: HttpErrorResponse) => {
+				console.log('connection issue');
+
 				if (err.status === 401) {
 					return this.handle401Error(req, next);
 				}
 
+				if (err.status === 504) {
+					return this.handle504Error(req, next);
+				}
+
 				return throwError(() => err);
 			})
+		);
+	}
+
+	/**
+	 * Handle when caching fails to get the api
+	 * @param req
+	 * @param next
+	 * @returns
+	 */
+	private handle504Error(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
+		if (this.isConnectionOK) {
+			this.isConnectionOK = false;
+			this.appSettingsService.toggleConnectionStatus(false);
+			this.connectionRestarted$.next(false);
+			this.tokenRefreshed$.next(false);
+		}
+
+		return this.connectionRestarted$.pipe(
+			filter(Boolean),
+			take(1),
+			concatMap(() => next.handle(this.addToken(req)))
 		);
 	}
 

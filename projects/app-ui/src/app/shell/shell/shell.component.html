@@ -16,7 +16,11 @@
 
 	<mat-sidenav-content>
 		<app-loading-bar class="position-absolute top-0 start-0 end-0"></app-loading-bar>
-
+		<app-connection-issue
+			class="position-absolute top-0 start-0 end-0 bottom-0"
+			*ngIf="!isConnectionOK"
+			style="background-color: black; z-index: 1"
+		></app-connection-issue>
 		<div class="main-content">
 			<router-outlet></router-outlet>
 		</div>

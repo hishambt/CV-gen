@@ -5,6 +5,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { DrawerHostDirective } from '../../shared/directives/drawer-host.directive';
 import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
 import { AppFormSharingService } from '../../shared/services/app-form-sharging.service';
+import { AppSettingsService } from '../../shared/services/app-settings.service';
 
 @Component({
 	selector: 'app-shell',
@@ -18,16 +19,26 @@ export class ShellComponent implements OnDestroy {
 	componentRef!: ComponentRef<any>;
 	drawerComponents: any[] = [];
 	dialogComponents: any[] = [];
+	isConnectionOK: boolean = true;
 
 	private _mobileQueryListener: () => void;
 
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private appFormSharingService: AppFormSharingService) {
+	constructor(
+		changeDetectorRef: ChangeDetectorRef,
+		media: MediaMatcher,
+		private appFormSharingService: AppFormSharingService,
+		private appSettingsService: AppSettingsService
+	) {
 		this.mobileQuery = media.matchMedia('(max-width: 576px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);
 
 		this.appFormSharingService.drawerCompoents$.subscribe((res: DrawerComponentItem[]) => {
 			this.drawerComponents = res;
+		});
+
+		this.appSettingsService.connectionStatus$.subscribe((res) => {
+			this.isConnectionOK = res;
 		});
 	}
 

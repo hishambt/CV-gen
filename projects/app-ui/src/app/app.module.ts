@@ -73,6 +73,11 @@ export function initAppAuthenticationService(authService: AuthService) {
 			useClass: LoadingHttpInterceptorService,
 			multi: true
 		}
+		// {
+		// 	provide: HTTP_INTERCEPTORS,
+		// 	useClass: ConnectionHttpInterceptor,
+		// 	multi: true
+		// }
 	],
 	bootstrap: [AppComponent]
 })
