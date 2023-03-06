@@ -1,11 +1,17 @@
 <mat-toolbar color="primary" class="toolbar align-items-center" style="height: 64px">
+	<div
+		class="pulse position-absolute top-0 start-0 bottom-0 cursor-help"
+		[title]="isOnline ? 'online' : 'offline'"
+		[ngClass]="isOnline ? 'is-online' : 'is-offline'"
+	></div>
+
 	<div class="d-inline-block d-sm-none ms-n3">
 		<button mat-icon-button (click)="toggleDrawer.emit()"><mat-icon>menu</mat-icon></button>
 	</div>
 	<div class="header-identity d-flex flex-flex">
 		<img [src]="'./assets/images/site-identity/identity-logo-50x50.png'" class="me-1" style="height: 50px; width: 50px" />
-		<div class="d-flex flex-column">
-			<h3 class="identity-name">ecomz store</h3>
+		<div class="d-flex flex-column ms-1">
+			<span class="identity-name">ecomz store</span>
 			<span class="identity-plan mat-caption">Pro Plan</span>
 		</div>
 	</div>

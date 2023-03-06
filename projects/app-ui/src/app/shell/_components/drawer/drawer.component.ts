@@ -38,7 +38,7 @@ export class DrawerComponent implements OnInit {
 			this.componentRef.instance.formData = res.data;
 			this.componentRef.instance.index = res.index;
 			this.componentRef.instance.closeDrawer.subscribe((res: any) => {
-				this.appFormSharingService.closeComponent();
+				this.appFormSharingService.closeComponent(res);
 				this.appDrawerHost.viewContainerRef.clear();
 				this.toggleDrawer();
 			});

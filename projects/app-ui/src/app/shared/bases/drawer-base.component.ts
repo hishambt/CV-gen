@@ -1,4 +1,4 @@
-import { SkipSelf, Input, Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
+import { Input, Component, OnDestroy, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -20,13 +20,13 @@ export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData
 	sendTotalNumberOfComponentsSubscription!: Subscription;
 
 	constructor(
-		@SkipSelf() private appFormSharingService: AppFormSharingService,
+		private appFormSharingService: AppFormSharingService,
 		errorService: ErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(errorService, authService, router, route);
+		super(router, route, errorService, authService);
 	}
 
 	override ngOnInit(): void {

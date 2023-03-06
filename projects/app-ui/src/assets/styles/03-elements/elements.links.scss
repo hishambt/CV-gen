@@ -12,3 +12,10 @@ a {
 a.link {
   color: var(--theme-primary-500) !important;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-help {
+  cursor: help;
+}

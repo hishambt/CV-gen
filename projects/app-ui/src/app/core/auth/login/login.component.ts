@@ -35,7 +35,7 @@ export class LoginComponent extends FormBaseComponent<any> implements OnInit, On
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(errorService, authService, router, route);
+		super(router, route, errorService, authService);
 
 		this.savedStores = this.loginStorageService.gemoveAllEntriesFromRecentlyLoggedIn() ?? [];
 		this.enableStoreSelection = this.savedStores.length > 0;

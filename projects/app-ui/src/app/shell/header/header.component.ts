@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AuthService } from '../../core/services/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class HeaderComponent {
 	@Output() toggleDrawer = new EventEmitter();
-
+	@Input() isOnline!: boolean;
 	constructor(private authService: AuthService) {}
 
 	logout() {

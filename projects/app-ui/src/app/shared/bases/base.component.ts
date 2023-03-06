@@ -18,6 +18,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 	isLoading = false;
 	isWaiting = false;
 	isAuthenticated = false;
+	isOnline = true;
 	errorMessage = '';
 
 	validationErrorMessages: ValidationErrors[] = [];
@@ -69,6 +70,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.clearErrorMessage();
 		this.clearValidationErrorMessages();
+		this.checkConnection();
 	}
 
 	public clearErrorMessage() {
@@ -77,6 +79,17 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
 	public clearValidationErrorMessages() {
 		this.validationErrorMessages = [];
+	}
+
+	private checkConnection() {
+		this.isOnline = navigator.onLine;
+		window.addEventListener('online', () => {
+			this.isOnline = true;
+		});
+
+		window.addEventListener('offline', () => {
+			this.isOnline = false;
+		});
 	}
 
 	ngOnDestroy(): void {

@@ -1,5 +1,5 @@
 <!-- mat-toolbar -->
-<app-header (toggleDrawer)="sideNav.toggle()"></app-header>
+<app-header (toggleDrawer)="sideNav.toggle()" [isOnline]="isOnline"></app-header>
 <!-- mat-sidenav-container -->
 <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="64">
 	<mat-sidenav
@@ -15,12 +15,12 @@
 	</mat-sidenav>
 
 	<mat-sidenav-content>
-		<app-loading-bar class="position-absolute top-0 start-0 end-0"></app-loading-bar>
-		<app-connection-issue
+		<app-shell-loading-bar class="position-absolute top-0 start-0 end-0"></app-shell-loading-bar>
+		<app-shell-connection-issue
 			class="position-absolute top-0 start-0 end-0 bottom-0"
 			*ngIf="!isConnectionOK"
 			style="background-color: black; z-index: 1"
-		></app-connection-issue>
+		></app-shell-connection-issue>
 		<div class="main-content">
 			<router-outlet></router-outlet>
 		</div>

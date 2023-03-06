@@ -26,7 +26,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	 */
 	abstract onLoadData(): TData;
 	abstract submitRecord(status?: string): Promise<void>;
-	constructor(errorService: ErrorService, authService: AuthService, protected router: Router, protected route: ActivatedRoute) {
+	constructor(protected router: Router, protected route: ActivatedRoute, errorService: ErrorService, authService: AuthService) {
 		super(errorService, authService);
 
 		this.sendValidationErrors$.subscribe((errors: any) => {
@@ -106,7 +106,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	 * Reload same route
 	 */
 	reloadRoute() {
-		// Must me used with onSameUrlNavigation to reload same url
+		// Must be used with onSameUrlNavigation to reload same url
 		this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 		this.router.navigate([this.router.url]);
 	}
