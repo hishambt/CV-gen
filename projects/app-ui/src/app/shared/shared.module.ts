@@ -11,8 +11,9 @@ import { SvgLoaderComponent } from './components/svg-loader/svg-loader.component
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { CustomersDropdownComponent } from './components/form-fields/customers-dropdown/customers-dropdown.component';
 import { FormActionBarComponent } from './components/form-action-bar/form-action-bar.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './components/page-header/breadcrumb/breadcrumb.component';
 import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivate-dialog/can-deactivate-dialog.component';
+import { PageHeaderComponent } from './components/page-header/page-header.component';
 
 @NgModule({
 	declarations: [
@@ -22,13 +23,14 @@ import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivat
 		AvatarComponent,
 		FormActionBarComponent,
 		BreadcrumbComponent,
-
+		PageHeaderComponent,
 		CanDeactivateDialogComponent,
 		// shared dropdowns
 		CustomersDropdownComponent
 	],
 	imports: [
 		CommonModule,
+		RouterModule,
 		TranslateModule.forChild(),
 		ReactiveFormsModule,
 		MaterialModule,
@@ -48,7 +50,7 @@ import { CanDeactivateDialogComponent } from './components/dialogs/can-deactivat
 		AvatarComponent,
 		FormActionBarComponent,
 		BreadcrumbComponent,
-
+		PageHeaderComponent,
 		// shared exported Pipes
 		SafePipe,
 		// shared exported dropdowns

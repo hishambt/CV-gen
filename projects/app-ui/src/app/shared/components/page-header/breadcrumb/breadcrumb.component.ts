@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { BreadcrumbItem } from '../../../models/breadcrumbItem';
 
 @Component({
 	selector: 'app-breadcrumb',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
 	styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent {
+	@Input() items: BreadcrumbItem[] = [];
 	constructor() {}
 }

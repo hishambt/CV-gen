@@ -2,12 +2,16 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { AuthService } from '../../../core/services/auth.service';
+import { BaseComponent } from '../../../shared/bases/base.component';
+import { ErrorService } from '../../../shared/services/error.service';
+
 @Component({
 	selector: 'app-home-view',
 	templateUrl: './home-view.component.html',
 	styleUrls: ['./home-view.component.scss']
 })
-export class HomeViewComponent implements OnDestroy {
+export class HomeViewComponent extends BaseComponent implements OnDestroy {
 	isExpanded = true;
 	showSubmenu: boolean = false;
 	isShowing = false;
@@ -43,13 +47,15 @@ export class HomeViewComponent implements OnDestroy {
 
 	private _mobileQueryListener: () => void;
 
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, errorService: ErrorService, authService: AuthService) {
+		super(errorService, authService);
 		this.mobileQuery = media.matchMedia('(max-width: 600px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);
 	}
 
-	ngOnDestroy(): void {
+	override ngOnDestroy(): void {
+		super.ngOnDestroy();
 		this.mobileQuery.removeEventListener('change', this._mobileQueryListener, false);
 	}
 }

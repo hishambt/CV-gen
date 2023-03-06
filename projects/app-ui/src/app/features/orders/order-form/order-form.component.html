@@ -1,5 +1,28 @@
 <div class="container-fluid">
-	<app-breadcrumb *ngIf="!isDrawerMode"></app-breadcrumb>
+	<app-page-header
+		*ngIf="!isDrawerMode"
+		[title]="'Orders'"
+		[breadcrumbItems]="[
+			{
+				text: 'Orders',
+				link: '/orders'
+			},
+			{
+				text: 'Add',
+				link: '/orders/add'
+			}
+		]"
+		[actionButtons]="[
+			{
+				visible: true,
+				disabled: false,
+				class: 'mat-raised-button w-100',
+				color: 'primary',
+				text: 'Login',
+				isWaiting: isWaiting
+			}
+		]"
+	></app-page-header>
 	<div class="row">
 		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<mat-card [ngClass]="{ 'mat-elevation-z0': isDrawerMode, 'px-0': isDrawerMode }">
