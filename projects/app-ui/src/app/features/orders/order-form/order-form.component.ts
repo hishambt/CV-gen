@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
-import { ErrorService } from '../../../shared/services/error.service';
+import { AppErrorService } from '../../../shared/services/app-error.service';
 import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class OrderFormComponent extends DrawerBaseComponent<any> implements OnIn
 
 	constructor(
 		appFormSharingService: AppFormSharingService,
-		errorService: ErrorService,
+		errorService: AppErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute

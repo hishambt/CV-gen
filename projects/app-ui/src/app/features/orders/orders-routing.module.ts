@@ -24,7 +24,7 @@ const routes: Routes = [
 		data: { mode: 'edit' }
 	},
 	{
-		path: 'view',
+		path: 'view/:id',
 		component: OrderViewComponent
 	}
 ];

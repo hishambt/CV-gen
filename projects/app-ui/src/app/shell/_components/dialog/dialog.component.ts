@@ -24,7 +24,7 @@ export class DialogComponent implements OnInit {
 			const comp = new ComponentItem(m);
 			const viewContainerRef = this.vcRef;
 			this.componentRef = viewContainerRef.createComponent<any>(comp.component);
-			this.componentRef.instance.isDrawerMode = true;
+			this.componentRef.instance.isDialogMode = true;
 			this.componentRef.instance.formMode = this.data.formMode;
 			this.componentRef.instance.formData = this.data.data;
 			this.componentRef.instance.index = this.data.index;

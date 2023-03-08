@@ -1,13 +1,40 @@
 <div class="container-fluid">
-	<app-breadcrumb *ngIf="!isDrawerMode"></app-breadcrumb>
+	<app-page-header
+		*ngIf="!isDrawerMode && !isDialogMode"
+		[title]="'Orders'"
+		[breadcrumbItems]="[
+			{
+				text: 'Orders',
+				link: '/orders'
+			},
+			{
+				text: 'Add',
+				link: '/orders/add'
+			}
+		]"
+		[actionButtons]="[
+			{
+				visible: isDirty,
+				disabled: false,
+				class: 'mat-raised-button w-100',
+				color: 'primary',
+				text: 'Save',
+				isWaiting: isWaiting
+			}
+		]"
+	></app-page-header>
 	<div class="row">
-		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
-			<mat-card [ngClass]="{ 'mat-elevation-z0': isDrawerMode, 'px-0': isDrawerMode }">
-				<h1>Create Customer</h1>
-				isDrawerMode:{{ isDrawerMode }} <br />
-				formMode:{{ formMode }} <br />
-				index:{{ index }}
-				<form [formGroup]="form">
+		<div [ngClass]="!isDrawerMode && !isDialogMode ? 'col-9' : 'col mt-2'">
+			<mat-card>
+				<h2>Create Customer</h2>
+				<mat-divider></mat-divider>
+				<!-- TODO: remove when stable v -->
+				<div class="d-none">
+					isDrawerMode:{{ isDrawerMode }} <br />
+					formMode:{{ formMode }} <br />
+					index:{{ index }}
+				</div>
+				<form class="pt-4" [formGroup]="form">
 					<div class="row">
 						<div class="col">
 							<mat-form-field class="d-block">
@@ -27,12 +54,12 @@
 				</form>
 			</mat-card>
 		</div>
-		<div class="col-3" *ngIf="!isDrawerMode"></div>
+		<div class="col-3" *ngIf="!isDrawerMode && !isDialogMode"></div>
 	</div>
-	<div class="row">
-		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
+	<div class="row" [ngClass]="isDrawerMode ? 'position-absolute bottom-0 start-12 end-12 pt-3 pb-2 mat-app-background' : ''">
+		<div [ngClass]="!isDrawerMode || !isDialogMode ? 'col-9' : 'col'">
 			<app-form-action-bar
-				[isDrawerMode]="isDrawerMode"
+				[isDrawerMode]="isDrawerMode || isDialogMode"
 				[startButtons]="[
 					{
 						visible: true,
@@ -44,7 +71,9 @@
 					},
 					{ visible: true, disabled: false, class: 'mat-stroked-button', color: 'accent', text: 'Cancel' }
 				]"
-				[endButtons]="[{ visible: !isDrawerMode, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				[endButtons]="[
+					{ visible: !isDrawerMode && !isDialogMode, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }
+				]"
 				(buttonClick)="onActionClick($event)"
 			></app-form-action-bar>
 		</div>

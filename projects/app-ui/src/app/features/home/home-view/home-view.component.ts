@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { BaseComponent } from '../../../shared/bases/base.component';
-import { ErrorService } from '../../../shared/services/error.service';
+import { AppErrorService } from '../../../shared/services/app-error.service';
 
 @Component({
 	selector: 'app-home-view',
@@ -47,7 +47,7 @@ export class HomeViewComponent extends BaseComponent implements OnDestroy {
 
 	private _mobileQueryListener: () => void;
 
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, errorService: ErrorService, authService: AuthService) {
+	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, errorService: AppErrorService, authService: AuthService) {
 		super(errorService, authService);
 		this.mobileQuery = media.matchMedia('(max-width: 600px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();

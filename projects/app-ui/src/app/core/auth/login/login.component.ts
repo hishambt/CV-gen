@@ -6,7 +6,7 @@ import { LoginResponse } from 'projects/app-api/src/model/loginResponse';
 import { lastValueFrom } from 'rxjs';
 
 import { FormBaseComponent } from '../../../shared/bases/form-base.component';
-import { ErrorService } from '../../../shared/services/error.service';
+import { AppErrorService } from '../../../shared/services/app-error.service';
 import { AuthService } from '../../services/auth.service';
 import { Store } from '../_models/stores';
 import { LoginStorageService } from '../_services/login-storage.services';
@@ -30,7 +30,7 @@ export class LoginComponent extends FormBaseComponent<any> implements OnInit, On
 
 	constructor(
 		private loginStorageService: LoginStorageService,
-		errorService: ErrorService,
+		errorService: AppErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute

@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
-import { ErrorService } from '../../../shared/services/error.service';
+import { AppErrorService } from '../../../shared/services/app-error.service';
 import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 import { SharedModule } from '../../../shared/shared.module';
 
@@ -24,7 +24,7 @@ export class CustomerFormComponent extends DrawerBaseComponent<any> implements O
 
 	constructor(
 		appFormSharingService: AppFormSharingService,
-		errorService: ErrorService,
+		errorService: AppErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute

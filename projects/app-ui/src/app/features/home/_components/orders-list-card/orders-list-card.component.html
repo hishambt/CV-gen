@@ -2,7 +2,7 @@
 	<h2>Latest orders</h2>
 	<mat-divider></mat-divider>
 	<ul class="list-group list-group-flush mb-3">
-		<li *ngFor="let order of data" class="list-group-item d-flex justify-content-between align-items-center">
+		<li *ngFor="let order of data$ | async" class="list-group-item d-flex justify-content-between align-items-center">
 			<div class="start-ctx">
 				<div class="fw-bold">
 					<mat-chip-list aria-label="Status selection">

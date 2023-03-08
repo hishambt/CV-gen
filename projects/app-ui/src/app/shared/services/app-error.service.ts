@@ -6,7 +6,7 @@ import { ProblemDetails, ValidationProblemDetails } from '../models/problemDetai
 @Injectable({
 	providedIn: 'root'
 })
-export class ErrorService {
+export class AppErrorService {
 	private notFoundError: ReplaySubject<ProblemDetails> = new ReplaySubject(0);
 	public notFoundError$ = this.notFoundError.asObservable();
 

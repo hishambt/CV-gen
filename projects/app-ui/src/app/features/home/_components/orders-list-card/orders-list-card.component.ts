@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HomeService } from 'projects/app-api/src/api/home.service';
 
 @Component({
@@ -6,13 +6,13 @@ import { HomeService } from 'projects/app-api/src/api/home.service';
 	templateUrl: './orders-list-card.component.html',
 	styleUrls: ['./orders-list-card.component.scss']
 })
-export class OrdersListCardComponent implements OnInit {
-	data: any;
+export class OrdersListCardComponent {
+	data$ = this.homeService.apiLastestOrdersGet(5);
 	constructor(private homeService: HomeService) {}
 
-	ngOnInit(): void {
-		this.homeService.apiLastestOrdersGet(5).subscribe((res) => {
-			this.data = res;
-		});
-	}
+	// ngOnInit(): void {
+	// 	// this.homeService.apiLastestOrdersGet(5).subscribe((res) => {
+	// 	// 	this.data = res;
+	// 	// });
+	// }
 }

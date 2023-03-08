@@ -6,6 +6,7 @@ import { environment } from 'projects/app-ui/src/environments/environment';
 
 import { AuthService } from '../services/auth.service';
 import { AppSettingsService } from '../../shared/services/app-settings.service';
+import { AppErrorService } from '../../shared/services/app-error.service';
 
 @Injectable()
 export class ServerHttpInterceptor implements HttpInterceptor {
@@ -14,7 +15,7 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 	tokenRefreshed$ = new BehaviorSubject<boolean>(false);
 	connectionRestarted$ = new BehaviorSubject<boolean>(false);
 
-	constructor(private authService: AuthService, private appSettingsService: AppSettingsService) {
+	constructor(private appErrorService: AppErrorService, private authService: AuthService, private appSettingsService: AppSettingsService) {
 		this.appSettingsService.connectionStatus$.subscribe((res) => {
 			if (res) {
 				this.isConnectionOK = res;
@@ -26,7 +27,9 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 	addToken(req: HttpRequest<any>): HttpRequest<any> {
 		const token = this.authService.token;
 
-		return token ? req.clone({ setHeaders: { Authorization: 'Bearer ' + token } }) : req;
+		return token
+			? req.clone({ setHeaders: { Authorization: 'Bearer ' + token, language: 'en', 'Accept-Language': 'en-US,en;', client: 'platform' } })
+			: req;
 	}
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -36,13 +39,17 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 			catchError((err: HttpErrorResponse) => {
 				console.log('connection issue');
 
+				// handle refresh token
 				if (err.status === 401) {
 					return this.handle401Error(req, next);
 				}
 
+				// handle offline
 				if (err.status === 504) {
 					return this.handle504Error(req, next);
 				}
+
+				// this.appErrorService.publishError(err);
 
 				return throwError(() => err);
 			})
@@ -70,6 +77,12 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 		);
 	}
 
+	/**
+	 * Handle when token fails
+	 * @param req
+	 * @param next
+	 * @returns
+	 */
 	private handle401Error(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
 		if (this.isRefreshingToken) {
 			// Wait untile tokenRefreshed$ get true value

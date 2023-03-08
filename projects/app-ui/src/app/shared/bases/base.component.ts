@@ -1,14 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 import { AuthService } from '../../core/services/auth.service';
-import { ErrorService } from '../services/error.service';
+import { AppErrorService } from '../services/app-error.service';
 
 @Component({
 	template: ''
 })
 export abstract class BaseComponent implements OnInit, OnDestroy {
+	destroyed$ = new Subject();
+
 	notFoundErrorSubscription!: Subscription;
 	internalServerErrorSubscription!: Subscription;
 	notReachableErrorSubscription!: Subscription;
@@ -25,7 +27,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 	private sendValidationErrors = new Subject<ValidationErrors[]>();
 	sendValidationErrors$ = this.sendValidationErrors.asObservable();
 
-	constructor(protected errorService: ErrorService, protected authService: AuthService) {
+	constructor(protected errorService: AppErrorService, protected authService: AuthService) {
 		this.notFoundErrorSubscription = this.errorService.notFoundError$.subscribe((problemDetails) => {
 			this.isWaiting = false;
 			this.errorMessage = problemDetails?.error;
@@ -65,6 +67,55 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 		this.userAuthenticatedSubscription = this.authService.isAuthenticated$.subscribe((res) => {
 			this.isAuthenticated = res;
 		});
+
+		// this.errorService.notFoundError$.pipe(
+		// 	tap((problemDetails) => {
+		// 		this.isWaiting = false;
+		// 		this.errorMessage = problemDetails?.title;
+		// 		this.isLoading = true;
+		// 	}),
+		// 	takeUntil(this.destroyed)
+		// );
+
+		// this.errorService.internalServerError$.pipe(
+		// 	tap((problemDetails) => {
+		// 		this.isWaiting = false;
+		// 		this.errorMessage = problemDetails?.title;
+		// 		this.isLoading = true;
+		// 	}),
+		// 	takeUntil(this.destroyed)
+		// );
+
+		// this.errorService.notReachableError$.pipe(
+		// 	tap((errorMessage) => {
+		// 		this.isWaiting = false;
+		// 		this.errorMessage = errorMessage;
+		// 		this.isLoading = true;
+		// 	}),
+		// 	takeUntil(this.destroyed)
+		// );
+
+		this.errorService.validationError$.pipe(takeUntil(this.destroyed$)).subscribe((validationProblemDetails) => {
+			this.isWaiting = false;
+
+			if (!validationProblemDetails?.errors) {
+				return;
+			}
+
+			Object.entries(validationProblemDetails.errors).forEach(([key, value]) => {
+				const validationError: ValidationErrors = {
+					key,
+					value
+				};
+				this.validationErrorMessages.push(validationError);
+			});
+
+			this.sendValidationErrors.next(this.validationErrorMessages);
+		});
+
+		this.authService.isAuthenticated$.pipe(takeUntil(this.destroyed$)).subscribe((res) => {
+			this.isAuthenticated = res;
+		});
 	}
 
 	ngOnInit(): void {
@@ -93,6 +144,9 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy(): void {
+		this.destroyed$.next(true);
+		this.destroyed$.complete();
+
 		if (this.notFoundErrorSubscription) {
 			this.notFoundErrorSubscription.unsubscribe();
 		}

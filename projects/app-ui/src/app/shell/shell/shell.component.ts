@@ -8,7 +8,7 @@ import { DrawerHostDirective } from '../../shared/directives/drawer-host.directi
 import { DrawerComponentItem } from '../../shared/models/drawerComponentItem';
 import { AppFormSharingService } from '../../shared/services/app-form-sharging.service';
 import { AppSettingsService } from '../../shared/services/app-settings.service';
-import { ErrorService } from '../../shared/services/error.service';
+import { AppErrorService } from '../../shared/services/app-error.service';
 
 @Component({
 	selector: 'app-shell',
@@ -31,7 +31,7 @@ export class ShellComponent extends BaseComponent implements OnInit, OnDestroy {
 		private media: MediaMatcher,
 		private appFormSharingService: AppFormSharingService,
 		private appSettingsService: AppSettingsService,
-		errorService: ErrorService,
+		errorService: AppErrorService,
 		authService: AuthService
 	) {
 		super(errorService, authService);

@@ -1,1 +1,69 @@
-<p>order-view works!</p>
+<div class="container-fluid">
+	<app-page-header
+		[title]="'View Order'"
+		[breadcrumbItems]="[
+			{
+				text: 'Orders',
+				link: '/orders'
+			},
+			{
+				text: 'View',
+				link: ''
+			}
+		]"
+	></app-page-header>
+	<div class="row">
+		<div class="col-9">
+			<mat-card class="vh-60">
+				<div class="order-view" *ngIf="order$ | async as order">
+					<div class="d-flex justify-content-between">
+						<h2>Order# {{ order.OrderNumber }}</h2>
+						<mat-chip-list aria-label="Order status">
+							<mat-chip selected [color]="order.StatusDescription.toLowerCase() === 'complete' ? 'primary' : ''">{{
+								order.StatusDescription
+							}}</mat-chip>
+							<mat-chip> {{ order.OrderDate | date : 'dd-MM-yyyy' }}</mat-chip>
+						</mat-chip-list>
+					</div>
+					<mat-divider></mat-divider>
+					<div class="pt-4">
+						<div class="row">
+							<div class="col-6">
+								<p><b>Channel</b> {{ order.ChannelName }}</p>
+							</div>
+							<div class="col-6">
+								<p><b>Currency</b> {{ order.Currency }}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<p><b>P.O#</b> {{ order.PoReferenceNumber }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-3">
+			<app-customer-details-card></app-customer-details-card>
+			<app-whats-next-list></app-whats-next-list>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-9">
+			<app-form-action-bar
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-stroked-button',
+						color: 'primary',
+						text: 'Back'
+					}
+				]"
+				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Edit' }]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
+		</div>
+	</div>
+</div>

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { BaseComponent } from './base.component';
-import { ErrorService } from '../services/error.service';
+import { AppErrorService } from '../services/app-error.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ComponentCanDeactivate } from '../models/componentCanDeactivate';
 
@@ -26,7 +26,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	 */
 	abstract onLoadData(): TData;
 	abstract submitRecord(status?: string): Promise<void>;
-	constructor(protected router: Router, protected route: ActivatedRoute, errorService: ErrorService, authService: AuthService) {
+	constructor(protected router: Router, protected route: ActivatedRoute, errorService: AppErrorService, authService: AuthService) {
 		super(errorService, authService);
 
 		this.sendValidationErrors$.subscribe((errors: any) => {

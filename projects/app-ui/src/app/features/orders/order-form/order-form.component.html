@@ -14,11 +14,11 @@
 		]"
 		[actionButtons]="[
 			{
-				visible: true,
+				visible: isDirty,
 				disabled: false,
-				class: 'mat-raised-button w-100',
+				class: 'mat-flat-button w-100',
 				color: 'primary',
-				text: 'Login',
+				text: 'Save',
 				isWaiting: isWaiting
 			}
 		]"
@@ -27,7 +27,7 @@
 		<div [ngClass]="!isDrawerMode ? 'col-9' : 'col'">
 			<mat-card [ngClass]="{ 'mat-elevation-z0': isDrawerMode, 'px-0': isDrawerMode }">
 				<div class="d-flex justify-content-between">
-					<h1>Create Order</h1>
+					<h2>Create Order</h2>
 					<mat-chip-list aria-label="Fish selection">
 						<mat-chip>Draft</mat-chip>
 						<mat-chip>21-02-2023 . 12:52 PM</mat-chip>
