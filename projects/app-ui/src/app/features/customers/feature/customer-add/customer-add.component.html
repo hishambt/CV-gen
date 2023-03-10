@@ -1,32 +1,68 @@
 <div class="container-fluid">
-	<app-page-header
-		*ngIf="!isDrawerMode && !isDialogMode"
-		[title]="'Orders'"
-		[breadcrumbItems]="[
-			{
-				text: 'Orders',
-				link: '/orders'
-			},
-			{
-				text: 'Add',
-				link: '/orders/add'
-			}
-		]"
-		[actionButtons]="[
-			{
-				visible: isDirty,
-				disabled: false,
-				class: 'mat-raised-button w-100',
-				color: 'primary',
-				text: 'Save',
-				isWaiting: isWaiting
-			}
-		]"
-	></app-page-header>
+	<ng-container *ngIf="!isDrawerMode && !isDialogMode && formMode === 'edit' && (customer$ | async) as vm">
+		<app-page-header
+			[title]="(formMode | titlecase) + ' ' + 'Personal Info'"
+			[breadcrumbItems]="[
+				{
+					text: 'Customers',
+					link: '/customers'
+				},
+				{
+					text: vm.FullName,
+					link: '/customers/' + vm.Id
+				},
+				{
+					text: 'Personal Info',
+					link: '/customers/' + vm.Id + '/personal-info'
+				},
+				{
+					text: 'Edit',
+					link: ''
+				}
+			]"
+			[actionButtons]="[
+				{
+					visible: isDirty,
+					disabled: false,
+					class: 'mat-raised-button w-100',
+					color: 'primary',
+					text: 'Save',
+					isWaiting: isWaiting
+				}
+			]"
+			(buttonClick)="onPageHeaderActionClick($event)"
+		></app-page-header>
+	</ng-container>
+	<ng-container *ngIf="!isDrawerMode && !isDialogMode && formMode === 'add'">
+		<app-page-header
+			[title]="'Create Customer'"
+			[breadcrumbItems]="[
+				{
+					text: 'Customers',
+					link: '/customers'
+				},
+				{
+					text: 'Add',
+					link: ''
+				}
+			]"
+			[actionButtons]="[
+				{
+					visible: isDirty,
+					disabled: false,
+					class: 'mat-raised-button w-100',
+					color: 'primary',
+					text: 'Save',
+					isWaiting: isWaiting
+				}
+			]"
+			(buttonClick)="onPageHeaderActionClick($event)"
+		></app-page-header>
+	</ng-container>
 	<div class="row">
 		<div [ngClass]="!isDrawerMode && !isDialogMode ? 'col-9' : 'col mt-2'">
 			<mat-card>
-				<h2>Create Customer</h2>
+				<h2>{{ formMode === 'add' ? 'Create Customer' : 'Edit Personal Info' }}</h2>
 				<mat-divider></mat-divider>
 				<!-- TODO: remove when stable v -->
 				<div class="d-none">

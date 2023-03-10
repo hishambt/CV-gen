@@ -1,0 +1,75 @@
+<div class="container-fluid">
+	<app-page-header
+		*ngIf="customer$ | async as vm"
+		[title]="'Add Billing Address'"
+		[breadcrumbItems]="[
+			{
+				text: 'Customers',
+				link: '/customers'
+			},
+			{
+				text: vm.FullName,
+				link: '/customers/' + vm.Id + '/personal-info'
+			},
+			{
+				text: 'Billing Address',
+				link: '/customers/' + vm.Id + '/billing-address'
+			},
+			{
+				text: formMode | titlecase,
+				link: ''
+			}
+		]"
+	></app-page-header>
+
+	<div class="row">
+		<div [ngClass]="!isDrawerMode && !isDialogMode ? 'col-9' : 'col mt-2'">
+			<mat-card>
+				<h2>{{ formMode === 'add' ? 'Add Billing Customer' : 'Edit Billing Address' }}</h2>
+				<mat-divider></mat-divider>
+				<!-- TODO: remove when stable v -->
+				<div class="d-none">
+					isDrawerMode:{{ isDrawerMode }} <br />
+					formMode:{{ formMode }} <br />
+					index:{{ index }}
+				</div>
+				<form class="pt-4" [formGroup]="form">
+					<div class="row">
+						<div class="col">
+							<mat-form-field class="d-block">
+								<mat-label>First name</mat-label>
+								<input type="text" matInput formControlName="companyName" placeholder="First name" />
+								<!-- <mat-error *ngIf="formControls['name'].hasError('required')"> Store Name required</mat-error> -->
+							</mat-form-field>
+						</div>
+						<div class="col"></div>
+					</div>
+				</form>
+			</mat-card>
+		</div>
+		<div class="col-3" *ngIf="!isDrawerMode && !isDialogMode">
+			<app-customer-links></app-customer-links>
+		</div>
+	</div>
+	<div class="row" [ngClass]="isDrawerMode ? 'position-absolute bottom-0 start-12 end-12 pt-3 pb-2 mat-app-background' : ''">
+		<div [ngClass]="!isDrawerMode || !isDialogMode ? 'col-9' : 'col'">
+			<app-form-action-bar
+				[isDrawerMode]="isDrawerMode || isDialogMode"
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-flat-button',
+						color: 'primary',
+						text: 'Save and Close'
+					},
+					{ visible: true, disabled: false, class: 'mat-stroked-button', color: 'accent', text: 'Cancel' }
+				]"
+				[endButtons]="[
+					{ visible: !isDrawerMode && !isDialogMode, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }
+				]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
+		</div>
+	</div>
+</div>

@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { AuthModule } from './core/auth/auth.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { WhiteLabelingModule } from './features/control-panel/white-labeling/white-labeling.module';
-import { CustomersModule } from './features/customers/customers.module';
 import { HomeModule } from './features/home/home.module';
 import { OrdersModule } from './features/orders/orders.module';
 import { ShellComponent } from './shell/shell/shell.component';
@@ -24,10 +23,11 @@ const routes: Routes = [
 				path: 'control-panel/white-labeling',
 				loadChildren: () => WhiteLabelingModule
 			},
+
 			{
 				path: 'customers',
 				canActivate: [AuthGuard],
-				loadChildren: () => CustomersModule
+				loadChildren: () => import('./features/customers/feature/customer-shell/customer-shell.module').then((m) => m.CustomerShellModule)
 			},
 			{
 				path: 'home',
@@ -52,6 +52,7 @@ const routes: Routes = [
 		RouterModule.forRoot(routes, {
 			scrollPositionRestoration: 'enabled',
 			onSameUrlNavigation: 'reload',
+			preloadingStrategy: PreloadAllModules,
 			useHash: true
 		})
 	],

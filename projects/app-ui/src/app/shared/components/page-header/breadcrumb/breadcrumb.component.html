@@ -3,7 +3,7 @@
 		<ng-container *ngIf="items.length <= 3; else wideBreadcrumb">
 			<li class="breadcrumb-item" *ngFor="let item of items; let last = last">
 				<a *ngIf="!last" class="breadcrumb-link" [routerLink]="[item?.link]">{{ item?.text | titlecase }}</a>
-				<span *ngIf="last" class="breadcrumb-link" [routerLink]="[item?.link]">{{ item?.text | titlecase }}</span>
+				<span *ngIf="last" class="breadcrumb-link">{{ item?.text | titlecase }}</span>
 			</li>
 		</ng-container>
 	</ol>
@@ -19,7 +19,7 @@
 		</li>
 		<li class="breadcrumb-item" *ngFor="let item of items.slice(items.length - 2); let last = last">
 			<a *ngIf="!last" class="breadcrumb-link" [routerLink]="[item?.link]">{{ item?.text | titlecase }}</a>
-			<span *ngIf="last" class="breadcrumb-link">{{ item?.text | titlecase }}</span>
+			<span *ngIf="last" class="breadcrumb-link1">{{ item?.text | titlecase }}</span>
 		</li>
 	</ng-container>
 	<mat-menu #menuBreadcrumb="matMenu">

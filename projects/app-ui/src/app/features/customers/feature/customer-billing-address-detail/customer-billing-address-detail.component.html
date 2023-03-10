@@ -1,0 +1,84 @@
+<div class="container-fluid">
+	<app-page-header
+		[title]="'Billing Address'"
+		*ngIf="customer$ | async as vm"
+		[breadcrumbItems]="[
+			{
+				text: 'Customers',
+				link: '/customers'
+			},
+			{
+				text: vm.FullName,
+				link: '/customers/' + vm.Id
+			},
+			{
+				text: 'Billing Address',
+				link: ''
+			}
+		]"
+		[actionButtons]="[
+			{
+				visible: vm.BillingAddress !== null,
+				disabled: false,
+				class: 'mat-flat-button',
+				color: 'primary',
+				text: 'Edit',
+				isWaiting: false
+			}
+		]"
+		(buttonClick)="onPageHeaderActionClick($event)"
+	></app-page-header>
+	<div class="row">
+		<div class="col-9">
+			<mat-card class="vh-60">
+				<div class="order-view" *ngIf="customer$ | async as vm">
+					<div class="d-flex justify-content-between">
+						<h2>Profile# {{ vm.ProfileNumber }}</h2>
+					</div>
+					<mat-divider></mat-divider>
+					<div class="pt-4" *ngIf="vm.BillingAddress !== null">
+						<div class="row">
+							<div class="col-6">
+								<p><b>Full Name</b> {{ vm.BillingAddress.FullName }}</p>
+							</div>
+							<div class="col-6">
+								<p>
+									<b>Email</b>
+									<a href="mailto:{{ vm.BillingAddress.EmailAddress }}">{{ vm.BillingAddress.EmailAddress }}</a>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								{{ vm.BillingAddress.FullAddress }}
+							</div>
+						</div>
+					</div>
+					<div class="pt-4" *ngIf="vm.BillingAddress === null">
+						No billing address info <a class="link" [routerLink]="['./add']">add</a>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-3">
+			<app-customer-links></app-customer-links>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-9">
+			<app-form-action-bar
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-stroked-button',
+						color: 'primary',
+						text: 'Back'
+					}
+				]"
+				[endButtons]="[]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
+		</div>
+	</div>
+</div>

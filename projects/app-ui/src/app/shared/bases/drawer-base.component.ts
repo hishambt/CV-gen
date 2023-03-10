@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../core/services/auth.service';
+import { ComponentCanDeactivate } from '../models/componentCanDeactivate';
 import { AppErrorService } from '../services/app-error.service';
 import { AppFormSharingService } from '../services/app-form-sharging.service';
 import { FormBaseComponent } from './form-base.component';
@@ -10,7 +11,7 @@ import { FormBaseComponent } from './form-base.component';
 @Component({
 	template: ''
 })
-export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData> implements OnInit, OnDestroy {
+export abstract class DrawerBaseComponent<TData> extends FormBaseComponent<TData> implements OnInit, OnDestroy, ComponentCanDeactivate {
 	@Input() index!: number;
 	@Input() override formData!: TData;
 	@Output() closeDrawer = new EventEmitter();

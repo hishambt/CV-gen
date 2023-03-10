@@ -64,8 +64,8 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 			firstName: this.bankFilterCtrl.value ?? '',
 			lastName: 'test'
 		};
-		const component = import('projects/app-ui/src/app/features/customers/customer-form/customer-form.component').then(
-			(m) => m.CustomerFormComponent
+		const component = import('projects/app-ui/src/app/features/customers/feature/customer-add/customer-add.component').then(
+			(m) => m.CustomerAddComponent
 		);
 
 		this.appFormSharingService.openComponentInDrawer(component, customer, 'add');

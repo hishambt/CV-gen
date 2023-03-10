@@ -1,0 +1,26 @@
+<mat-card>
+	<h2>Customer Additional Info</h2>
+	<mat-divider></mat-divider>
+	<ul class="list-group list-group-flush mb-3" *ngIf="customer$ | async as vm">
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			<a class="link" [routerLink]="['/customers/', vm.Id, 'personal-info']" routerLinkActive="router-link-active">Personal Info</a>
+		</li>
+		<li class="list-group-item d-flex justify-content-between align-items-center">
+			<a
+				*ngIf="vm.BillingAddress !== null"
+				class="link"
+				[routerLink]="['/customers/', vm.Id, 'billing-address']"
+				routerLinkActive="router-link-active"
+				>Billing Address</a
+			>
+			<a
+				*ngIf="vm.BillingAddress === null"
+				class="link"
+				[routerLink]="['/customers/', vm.Id, 'billing-address', 'add']"
+				routerLinkActive="router-link-active"
+				>Billing Address</a
+			>
+			<span *ngIf="vm.BillingAddress === null">Add</span>
+		</li>
+	</ul>
+</mat-card>
