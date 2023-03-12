@@ -47,8 +47,8 @@ export class HomeViewComponent extends BaseComponent implements OnDestroy {
 
 	private _mobileQueryListener: () => void;
 
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, errorService: AppErrorService, authService: AuthService) {
-		super(errorService, authService);
+	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, appErrorService: AppErrorService, authService: AuthService) {
+		super(authService, appErrorService);
 		this.mobileQuery = media.matchMedia('(max-width: 600px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);

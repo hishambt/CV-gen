@@ -27,27 +27,28 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 	private sendValidationErrors = new Subject<ValidationErrors[]>();
 	sendValidationErrors$ = this.sendValidationErrors.asObservable();
 
-	constructor(protected errorService: AppErrorService, protected authService: AuthService) {
-		this.notFoundErrorSubscription = this.errorService.notFoundError$.subscribe((problemDetails) => {
+	constructor(protected authService: AuthService, protected appErrorService: AppErrorService) {
+		this.notFoundErrorSubscription = this.appErrorService.notFoundError$.subscribe((problemDetails) => {
 			this.isWaiting = false;
 			this.errorMessage = problemDetails?.error;
 			this.isLoading = true;
 		});
 
-		this.internalServerErrorSubscription = this.errorService.internalServerError$.subscribe((problemDetails) => {
+		this.internalServerErrorSubscription = this.appErrorService.internalServerError$.subscribe((problemDetails) => {
 			this.isWaiting = false;
 			this.errorMessage = problemDetails?.title;
 			this.isLoading = true;
 		});
 
-		this.notReachableErrorSubscription = this.errorService.notReachableError$.subscribe((errorMessage) => {
+		this.notReachableErrorSubscription = this.appErrorService.notReachableError$.subscribe((errorMessage) => {
 			this.isWaiting = false;
 			this.errorMessage = errorMessage;
 			this.isLoading = true;
 		});
 
-		this.validationErrorSubscription = this.errorService.validationError$.subscribe((validationProblemDetails) => {
+		this.validationErrorSubscription = this.appErrorService.validationError$.subscribe((validationProblemDetails) => {
 			this.isWaiting = false;
+			debugger;
 
 			if (!validationProblemDetails?.errors) {
 				return;
@@ -68,7 +69,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 			this.isAuthenticated = res;
 		});
 
-		// this.errorService.notFoundError$.pipe(
+		// this.appErrorService.notFoundError$.pipe(
 		// 	tap((problemDetails) => {
 		// 		this.isWaiting = false;
 		// 		this.errorMessage = problemDetails?.title;
@@ -77,7 +78,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 		// 	takeUntil(this.destroyed)
 		// );
 
-		// this.errorService.internalServerError$.pipe(
+		// this.appErrorService.internalServerError$.pipe(
 		// 	tap((problemDetails) => {
 		// 		this.isWaiting = false;
 		// 		this.errorMessage = problemDetails?.title;
@@ -86,7 +87,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 		// 	takeUntil(this.destroyed)
 		// );
 
-		// this.errorService.notReachableError$.pipe(
+		// this.appErrorService.notReachableError$.pipe(
 		// 	tap((errorMessage) => {
 		// 		this.isWaiting = false;
 		// 		this.errorMessage = errorMessage;
@@ -95,23 +96,23 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 		// 	takeUntil(this.destroyed)
 		// );
 
-		this.errorService.validationError$.pipe(takeUntil(this.destroyed$)).subscribe((validationProblemDetails) => {
-			this.isWaiting = false;
+		// this.appErrorService.validationError$.subscribe((validationProblemDetails) => {
+		// 	this.isWaiting = false;
 
-			if (!validationProblemDetails?.errors) {
-				return;
-			}
+		// 	if (!validationProblemDetails?.errors) {
+		// 		return;
+		// 	}
 
-			Object.entries(validationProblemDetails.errors).forEach(([key, value]) => {
-				const validationError: ValidationErrors = {
-					key,
-					value
-				};
-				this.validationErrorMessages.push(validationError);
-			});
+		// 	Object.entries(validationProblemDetails.errors).forEach(([key, value]) => {
+		// 		const validationError: ValidationErrors = {
+		// 			key,
+		// 			value
+		// 		};
+		// 		this.validationErrorMessages.push(validationError);
+		// 	});
 
-			this.sendValidationErrors.next(this.validationErrorMessages);
-		});
+		// 	this.sendValidationErrors.next(this.validationErrorMessages);
+		// });
 
 		this.authService.isAuthenticated$.pipe(takeUntil(this.destroyed$)).subscribe((res) => {
 			this.isAuthenticated = res;

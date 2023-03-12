@@ -39,12 +39,12 @@ export class CustomerBillingAddressAddComponent extends FormModalBaseComponent<a
 	constructor(
 		public customersStore: CustomersStore,
 		appFormSharingService: AppFormSharingService,
-		errorService: AppErrorService,
+		appErrorService: AppErrorService,
 		authService: AuthService,
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(appFormSharingService, router, route, authService, errorService);
+		super(appFormSharingService, router, route, authService, appErrorService);
 	}
 
 	override ngOnInit(): void {

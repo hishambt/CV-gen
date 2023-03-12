@@ -23,8 +23,8 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 		'PhoneNumber'
 	];
 
-	constructor(public customersStore: CustomersStore, private router: Router, errorService: AppErrorService, authService: AuthService) {
-		super(errorService, authService);
+	constructor(public customersStore: CustomersStore, private router: Router, appErrorService: AppErrorService, authService: AuthService) {
+		super(authService, appErrorService);
 	}
 
 	viewRecord(row: any) {

@@ -49,6 +49,7 @@ export class ServerHttpInterceptor implements HttpInterceptor {
 					return this.handle504Error(req, next);
 				}
 
+				// TODO: handle error service
 				// this.appErrorService.publishError(err);
 
 				return throwError(() => err);

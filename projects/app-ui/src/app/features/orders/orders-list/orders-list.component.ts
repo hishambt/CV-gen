@@ -21,8 +21,8 @@ export class OrdersListComponent extends BaseComponent {
 
 	displayedColumns: string[] = ['InvoiceNumber', 'OrderDate', 'StatusDescription', 'Customer', 'ChannelName', 'ShippingAddress', 'Total'];
 
-	constructor(private orderService: OrderService, private router: Router, errorService: AppErrorService, authService: AuthService) {
-		super(errorService, authService);
+	constructor(private orderService: OrderService, private router: Router, appErrorService: AppErrorService, authService: AuthService) {
+		super(authService, appErrorService);
 	}
 
 	viewRecord(row: any) {

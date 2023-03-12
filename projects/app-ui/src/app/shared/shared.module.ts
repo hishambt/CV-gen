@@ -25,7 +25,7 @@ import { PageHeaderComponent } from './components/page-header/page-header.compon
 		BreadcrumbComponent,
 		PageHeaderComponent,
 		CanDeactivateDialogComponent,
-		// shared dropdowns
+		// shared form field components
 		CustomersDropdownComponent
 	],
 	imports: [

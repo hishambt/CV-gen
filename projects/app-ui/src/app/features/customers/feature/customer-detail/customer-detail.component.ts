@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OrderService } from 'projects/app-api/src/api/order.service';
+import { AuthService } from 'projects/app-ui/src/app/core/services/auth.service';
+import { BaseComponent } from 'projects/app-ui/src/app/shared/bases/base.component';
+import { AppErrorService } from 'projects/app-ui/src/app/shared/services/app-error.service';
 import { map, shareReplay, switchMap } from 'rxjs';
 
 import { CustomersStore } from '../../data-access/customers.store';
@@ -10,7 +12,7 @@ import { CustomersStore } from '../../data-access/customers.store';
 	templateUrl: './customer-detail.component.html',
 	styleUrls: ['./customer-detail.component.scss']
 })
-export class CustomerDetailComponent implements OnInit {
+export class CustomerDetailComponent extends BaseComponent implements OnInit {
 	customer$ = this.route.paramMap.pipe(
 		switchMap((params) =>
 			this.customersStore.customers$.pipe(
@@ -20,9 +22,18 @@ export class CustomerDetailComponent implements OnInit {
 		)
 	);
 
-	constructor(public customersStore: CustomersStore, private route: ActivatedRoute, private router: Router, private orderService: OrderService) {}
+	constructor(
+		public customersStore: CustomersStore,
+		private route: ActivatedRoute,
+		private router: Router,
+		authService: AuthService,
+		appErrorService: AppErrorService
+	) {
+		super(authService, appErrorService);
+	}
 
-	ngOnInit() {
+	override ngOnInit() {
+		super.ngOnInit();
 		this.customersStore.loadCustomers();
 	}
 

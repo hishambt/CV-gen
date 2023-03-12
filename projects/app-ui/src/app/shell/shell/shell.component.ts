@@ -31,10 +31,10 @@ export class ShellComponent extends BaseComponent implements OnInit, OnDestroy {
 		private media: MediaMatcher,
 		private appFormSharingService: AppFormSharingService,
 		private appSettingsService: AppSettingsService,
-		errorService: AppErrorService,
+		appErrorService: AppErrorService,
 		authService: AuthService
 	) {
-		super(errorService, authService);
+		super(authService, appErrorService);
 		this.mobileQuery = media.matchMedia('(max-width: 576px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addEventListener('change', this._mobileQueryListener, false);
