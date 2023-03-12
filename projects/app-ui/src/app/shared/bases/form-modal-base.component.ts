@@ -23,12 +23,12 @@ export abstract class FormModalBaseComponent<TData> extends FormBaseComponent<TD
 
 	constructor(
 		private appFormSharingService: AppFormSharingService,
-		errorService: AppErrorService,
-		authService: AuthService,
 		router: Router,
-		route: ActivatedRoute
+		route: ActivatedRoute,
+		authService: AuthService,
+		errorService: AppErrorService
 	) {
-		super(router, route, errorService, authService);
+		super(router, route, authService, errorService);
 	}
 
 	override ngOnInit(): void {

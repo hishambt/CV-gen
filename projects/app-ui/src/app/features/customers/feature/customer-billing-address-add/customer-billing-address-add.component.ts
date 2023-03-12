@@ -44,7 +44,7 @@ export class CustomerBillingAddressAddComponent extends FormModalBaseComponent<a
 		router: Router,
 		route: ActivatedRoute
 	) {
-		super(appFormSharingService, errorService, authService, router, route);
+		super(appFormSharingService, router, route, authService, errorService);
 	}
 
 	override ngOnInit(): void {

@@ -26,7 +26,7 @@ export abstract class FormBaseComponent<TData> extends BaseComponent implements 
 	 */
 	abstract onLoadData(): TData;
 	abstract submitRecord(status?: string): Promise<void>;
-	constructor(protected router: Router, protected route: ActivatedRoute, errorService: AppErrorService, authService: AuthService) {
+	constructor(protected router: Router, protected route: ActivatedRoute, authService: AuthService, errorService: AppErrorService) {
 		super(errorService, authService);
 
 		this.sendValidationErrors$.subscribe((errors: any) => {

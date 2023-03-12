@@ -20,12 +20,12 @@ export class OrderFormComponent extends FormModalBaseComponent<any> implements O
 
 	constructor(
 		appFormSharingService: AppFormSharingService,
-		errorService: AppErrorService,
-		authService: AuthService,
 		router: Router,
-		route: ActivatedRoute
+		route: ActivatedRoute,
+		authService: AuthService,
+		errorService: AppErrorService
 	) {
-		super(appFormSharingService, errorService, authService, router, route);
+		super(appFormSharingService, router, route, authService, errorService);
 	}
 
 	override ngOnInit(): void {

@@ -42,12 +42,12 @@ export class CustomerAddComponent extends FormModalBaseComponent<any> implements
 	constructor(
 		appFormSharingService: AppFormSharingService,
 		public customersStore: CustomersStore,
-		errorService: AppErrorService,
-		authService: AuthService,
 		router: Router,
-		route: ActivatedRoute
+		route: ActivatedRoute,
+		authService: AuthService,
+		errorService: AppErrorService
 	) {
-		super(appFormSharingService, errorService, authService, router, route);
+		super(appFormSharingService, router, route, authService, errorService);
 	}
 
 	override ngOnInit(): void {
