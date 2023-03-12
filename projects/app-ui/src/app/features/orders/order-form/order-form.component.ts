@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { DrawerBaseComponent } from '../../../shared/bases/drawer-base.component';
+import { FormModalBaseComponent } from '../../../shared/bases/form-modal-base.component';
 import { AppErrorService } from '../../../shared/services/app-error.service';
 import { AppFormSharingService } from '../../../shared/services/app-form-sharging.service';
 
@@ -11,7 +11,7 @@ import { AppFormSharingService } from '../../../shared/services/app-form-shargin
 	templateUrl: './order-form.component.html',
 	styleUrls: ['./order-form.component.scss']
 })
-export class OrderFormComponent extends DrawerBaseComponent<any> implements OnInit {
+export class OrderFormComponent extends FormModalBaseComponent<any> implements OnInit {
 	foods: any[] = [
 		{ value: 'steak-0', viewValue: 'Steak' },
 		{ value: 'pizza-1', viewValue: 'Pizza' },

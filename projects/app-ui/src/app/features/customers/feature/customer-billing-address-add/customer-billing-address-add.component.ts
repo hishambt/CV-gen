@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap, tap } from 'rxjs';
 import { AuthService } from 'projects/app-ui/src/app/core/services/auth.service';
-import { DrawerBaseComponent } from 'projects/app-ui/src/app/shared/bases/drawer-base.component';
+import { FormModalBaseComponent } from 'projects/app-ui/src/app/shared/bases/form-modal-base.component';
 import { AppErrorService } from 'projects/app-ui/src/app/shared/services/app-error.service';
 import { AppFormSharingService } from 'projects/app-ui/src/app/shared/services/app-form-sharging.service';
 
@@ -13,7 +13,7 @@ import { CustomersStore } from '../../data-access/customers.store';
 	templateUrl: './customer-billing-address-add.component.html',
 	styleUrls: ['./customer-billing-address-add.component.scss']
 })
-export class CustomerBillingAddressAddComponent extends DrawerBaseComponent<any> implements OnInit {
+export class CustomerBillingAddressAddComponent extends FormModalBaseComponent<any> implements OnInit {
 	customer$ = this.route.paramMap.pipe(
 		switchMap((params) =>
 			this.customersStore.customers$.pipe(
