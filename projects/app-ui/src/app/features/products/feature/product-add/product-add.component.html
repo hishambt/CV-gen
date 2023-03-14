@@ -1,0 +1,57 @@
+<div class="container-fluid">
+	<app-page-header
+		[title]="(formMode | titlecase) + ' ' + 'Product'"
+		[breadcrumbItems]="[
+			{
+				text: 'Products',
+				link: '/products'
+			},
+
+			{
+				text: formMode | titlecase,
+				link: ''
+			}
+		]"
+		[actionButtons]="[
+			{
+				visible: isDirty,
+				disabled: false,
+				class: 'mat-raised-button w-100',
+				color: 'primary',
+				text: 'Save',
+				isWaiting: isWaiting
+			}
+		]"
+		(buttonClick)="onPageHeaderActionClick($event)"
+	></app-page-header>
+
+	<div class="row">
+		<div class="col-9">
+			<mat-card>
+				<h2>{{ formMode === 'add' ? 'Create Product' : 'Edit Product' }}</h2>
+				<mat-divider></mat-divider>
+			</mat-card>
+		</div>
+		<div class="col-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-9">
+			<app-form-action-bar
+				[isDrawerMode]="false"
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-flat-button',
+						color: 'primary',
+						text: 'Save and Close',
+						options: [{ text: 'Save and New' }]
+					},
+					{ visible: true, disabled: false, class: 'mat-stroked-button', color: 'accent', text: 'Cancel' }
+				]"
+				[endButtons]="[{ visible: true, disabled: false, class: 'mat-raised-button', color: 'warn', text: 'Reset' }]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
+		</div>
+	</div>
+</div>

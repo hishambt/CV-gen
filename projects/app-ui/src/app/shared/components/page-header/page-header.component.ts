@@ -3,6 +3,30 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActionButton } from '../../models/actionButton';
 import { BreadcrumbItem } from '../../models/breadcrumbItem';
 
+/**
+ * Example how to use this shared Page Header
+ * @example
+ * 		<app-page-header
+ *			[title]="(formMode | titlecase) + ' ' + 'Personal Info'"
+ *			[breadcrumbItems]="[
+ *				{
+ *					text: 'Customers',
+ *					link: '/customers'
+ *				}
+ *			]"
+ *			[actionButtons]="[
+ *				{
+ *					visible: isDirty,
+ *					disabled: false,
+ *					class: 'mat-raised-button w-100',
+ *					color: 'primary',
+ *					text: 'Save',
+ *					isWaiting: isWaiting
+ *				}
+ *			]"
+ *			(buttonClick)="onPageHeaderActionClick($event)"
+ *		></app-page-header>
+ */
 @Component({
 	selector: 'app-page-header',
 	templateUrl: './page-header.component.html',

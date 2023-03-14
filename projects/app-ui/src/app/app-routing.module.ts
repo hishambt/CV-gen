@@ -23,7 +23,11 @@ const routes: Routes = [
 				path: 'control-panel/white-labeling',
 				loadChildren: () => WhiteLabelingModule
 			},
-
+			{
+				path: 'products',
+				canActivate: [AuthGuard],
+				loadChildren: () => import('./features/products/feature/product-shell/product-shell.module').then((m) => m.ProductShellModule)
+			},
 			{
 				path: 'customers',
 				canActivate: [AuthGuard],

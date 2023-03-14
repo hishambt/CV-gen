@@ -1,0 +1,72 @@
+<div class="container-fluid">
+	<app-page-header
+		*ngIf="product$ | async as vm"
+		[title]="'Product Details'"
+		[breadcrumbItems]="[
+			{
+				text: 'Products',
+				link: '/products'
+			},
+			{
+				text: vm.Items[0].ProductTitle,
+				link: '/products/' + vm.Id + '/view'
+			},
+			{
+				text: 'Details',
+				link: ''
+			}
+		]"
+		[actionButtons]="[
+			{
+				visible: true,
+				disabled: false,
+				class: 'mat-flat-button',
+				color: 'primary',
+				text: 'Edit',
+				isWaiting: false
+			}
+		]"
+		(buttonClick)="onPageHeaderActionClick($event)"
+	></app-page-header>
+
+	<div class="row">
+		<div class="col-9">
+			<mat-card class="vh-60">
+				<div class="order-view" *ngIf="product$ | async as vm">
+					<div class="d-flex justify-content-between">
+						<h2>{{ vm.Items[0].ProductTitle }}</h2>
+						<mat-chip-list aria-label="Customer status">
+							<mat-chip> {{ vm.CreatedDate | date : 'dd-MM-yyyy' }}</mat-chip>
+						</mat-chip-list>
+					</div>
+					<mat-divider></mat-divider>
+					<div class="pt-4">
+						<div class="row">
+							<div class="col-6">
+								<p><b>First Name</b> {{ vm.Items[0].ProductTitle }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="col-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-9">
+			<app-form-action-bar
+				[startButtons]="[
+					{
+						visible: true,
+						disabled: false,
+						class: 'mat-stroked-button',
+						color: 'primary',
+						text: 'Back'
+					}
+				]"
+				[endButtons]="[]"
+				(buttonClick)="onActionClick($event)"
+			></app-form-action-bar>
+		</div>
+	</div>
+</div>

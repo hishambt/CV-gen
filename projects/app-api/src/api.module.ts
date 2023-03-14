@@ -7,12 +7,13 @@ import { LoginService } from './api/login.service';
 import { WinnerService } from './api/winner.service';
 import { HomeService } from './api/home.service';
 import { OrderService } from './api/order.service';
+import { ProductService } from './api/product.service';
 
 @NgModule({
 	imports: [],
 	declarations: [],
 	exports: [],
-	providers: [CabService, CustomerService, LoginService, WinnerService, HomeService, OrderService]
+	providers: [CabService, CustomerService, LoginService, WinnerService, HomeService, OrderService, ProductService]
 })
 export class ApiModule {
 	constructor(@Optional() @SkipSelf() parentModule: ApiModule, @Optional() http: HttpClient) {

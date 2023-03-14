@@ -42,7 +42,7 @@ export abstract class FormModalBaseComponent<TData> extends FormBaseComponent<TD
 	}
 
 	override goBack(): void {
-		if (!this.isDrawerMode) {
+		if (!this.isDrawerMode && !this.isDialogMode) {
 			this.router.navigate(['../'], { relativeTo: this.route });
 		} else {
 			this.closeSideDrawer();

@@ -83,32 +83,6 @@ $utilities: map-merge(
                     values: $spacers,
                 )
             ),
-        // "border-start":
-        //     map-merge(
-        //         map-get($utilities, "border-start"),
-        //         (
-        //             responsive: true,
-        //             property: border-inline-start,
-        //             class: border-start,
-        //             values: (
-        //                 null: $border-width solid $border-color,
-        //                 0: 0,
-        //             ),
-        //         )
-        //     ),
-        // "border-end":
-        //     map-merge(
-        //         map-get($utilities, "border-end"),
-        //         (
-        //             responsive: true,
-        //             property: border-inline-end,
-        //             class: border-end,
-        //             values: (
-        //                 null: $border-width solid $border-color,
-        //                 0: 0,
-        //             ),
-        //         )
-        //     ),
         "start":
             map-merge(
                 map-get($utilities, "start"),

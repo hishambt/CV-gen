@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { AppSettingsService } from '../../../shared/services/app-settings.service';
 
 @Component({
 	selector: 'app-shell-loading-bar',
 	templateUrl: './shell-loading-bar.component.html',
-	styleUrls: ['./shell-loading-bar.component.scss']
+	styleUrls: ['./shell-loading-bar.component.scss'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ShellLoadingBarComponent implements OnInit {
-	public isLoading = false;
-
+export class ShellLoadingBarComponent {
+	public isLoading$ = this.appSettingsService.isAppLoading$;
 	constructor(private appSettingsService: AppSettingsService) {}
-
-	ngOnInit(): void {
-		this.appSettingsService.isAppLoading$.subscribe((res: boolean) => {
-			this.isLoading = res;
-		});
-	}
 }

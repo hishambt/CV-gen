@@ -27,6 +27,11 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 		super(authService, appErrorService);
 	}
 
+	override ngOnInit(): void {
+		super.ngOnInit();
+		this.customersStore.loadCustomers();
+	}
+
 	viewRecord(row: any) {
 		this.router.navigate(['/customers', row.Id, 'personal-info']);
 	}
@@ -37,10 +42,5 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 				this.router.navigate(['/customers/add']);
 				break;
 		}
-	}
-
-	override ngOnInit(): void {
-		super.ngOnInit();
-		this.customersStore.loadCustomers();
 	}
 }

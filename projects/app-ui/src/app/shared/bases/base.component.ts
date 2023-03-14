@@ -48,7 +48,6 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
 		this.validationErrorSubscription = this.appErrorService.validationError$.subscribe((validationProblemDetails) => {
 			this.isWaiting = false;
-			debugger;
 
 			if (!validationProblemDetails?.errors) {
 				return;

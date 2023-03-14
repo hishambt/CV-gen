@@ -22,6 +22,20 @@ export const items: Array<IMenuItem> = [
 		routerLink: '/home'
 	},
 	{
+		text: 'Products',
+		icon: 'inventory_2',
+		selected: false,
+		expanded: false,
+		children: [
+			{
+				text: 'All products',
+				icon: 'category',
+				selected: false,
+				routerLink: '/products'
+			}
+		]
+	},
+	{
 		text: 'Orders',
 		icon: 'inventory_2',
 		selected: false,

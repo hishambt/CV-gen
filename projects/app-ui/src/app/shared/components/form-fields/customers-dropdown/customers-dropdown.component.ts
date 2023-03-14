@@ -68,6 +68,9 @@ export class CustomersDropdownComponent implements OnInit, AfterViewInit, OnDest
 			(m) => m.CustomerAddComponent
 		);
 
+		// TODO: openComponentInDrawer should return the index of the target opened component
+		// that represent the index of the opened Drawer
+		// this index should be used to check if(retrived index is equal to the provided index by onCloseComponentInDrawer)
 		this.appFormSharingService.openComponentInDrawer(component, customer, 'add');
 	}
 
