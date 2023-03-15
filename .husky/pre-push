@@ -3,5 +3,5 @@
 # npx husky add .husky/commit-msg 'npx commitlint --edit $1'
 # npx --no-install commitlint --edit $1
 # npx pretty-quick --staged
-
+# npm run lint -> removed to avoid linting while pushing
 exit 0;
