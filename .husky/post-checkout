@@ -1,0 +1,18 @@
+# TODO: fix the hook
+#!/bin/sh
+# .git/hooks/post-checout
+# . "$(dirname "$0")/_/husky.sh"
+# npx --no-install commitlint --edit "$1"
+# echo 'the post-checout hook started'
+
+# confirm the environment variable exists and it is 'true'
+# if [ ! -z $PRE_CHECKOUT ] && $PRE_CHECKOUT
+# then
+#   exit 0
+# fi
+
+# . .husky/pre-checkout
+# BRANCH=$(git branch --show-current)
+# echo "now in $BRANCH branch doing post-checkout stuff"
+
+# echo 'the post-checout hook is done'

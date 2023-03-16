@@ -1,0 +1,15 @@
+# TODO: fix the hook
+#!/bin/sh
+# .git/hooks/pre-checout
+# . "$(dirname "$0")/_/husky.sh"
+
+# echo 'the pre-checout hook started'
+# export PRE_CHECKOUT=true
+# git switch --quiet -
+# BRANCH=$(git branch --show-current)
+# npx branch-name-lint options.json
+# echo "first go back to $BRANCH branch to do stuff"
+# git switch --quiet -
+# echo 'the pre-checout hook is done'
+
+# exit 0;
